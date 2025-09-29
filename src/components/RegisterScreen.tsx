@@ -17,6 +17,16 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
   const [showRegistrationSuccess, setShowRegistrationSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [referralCode, setReferralCode] = useState('');
+
+  React.useEffect(() => {
+    // Get referral code from URL
+    const path = window.location.pathname;
+    const refCodeMatch = path.match(/\/register\/refcode=([A-Za-z0-9]+)/);
+    if (refCodeMatch && refCodeMatch[1]) {
+      setReferralCode(refCodeMatch[1]);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +39,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
         phone: phoneNumber,
         password: password,
         withdrawal_password: withdrawalPassword,
+        referred_by: referralCode || undefined,
       });
 
       // Store the JWT token
@@ -113,6 +124,20 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
                   placeholder="Password"
                   className="w-full pl-12 pr-4 py-4 bg-transparent outline-none text-gray-700 placeholder-gray-400"
                   required
+                />
+              </div>
+            </div>
+
+            {/* Referral Code Input (Optional) */}
+            <div className="relative">
+              <div className="flex items-center bg-white rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 transition-colors">
+                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  value={referralCode}
+                  onChange={(e) => setReferralCode(e.target.value)}
+                  placeholder="Referral Code (Optional)"
+                  className="w-full pl-12 pr-4 py-4 bg-transparent outline-none text-gray-700 placeholder-gray-400"
                 />
               </div>
             </div>

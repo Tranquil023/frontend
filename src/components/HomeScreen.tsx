@@ -21,7 +21,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
   const [showNotification, setShowNotification] = useState(false);
 
   const actionButtons = [
-    { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: onNavigateToCheckIn },
+    { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: "" },
     { icon: MessageCircle, label: 'contact', color: 'from-purple-500 to-purple-600', onClick: onNavigateToContact },
     { icon: CreditCard, label: 'Recharge', color: 'from-green-500 to-green-600', onClick: onNavigateToRecharge },
     { icon: ArrowDownToLine, label: 'withdraw', color: 'from-orange-500 to-orange-600', onClick: onNavigateToWithdraw },

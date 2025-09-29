@@ -17,12 +17,19 @@ const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) =>
     const fetchBankDetails = async () => {
       try {
         setLoading(true);
-        const res = await api.get('/users/bank-details'); // API to get bank account
+        const res = await api.get('/users/bank-details');
+        console.log(res) // API to get bank account
         if (res.data.exists) {
-          setBankAccount(res.data.account);
+          if (res.data.account.length === 0) {
+            setBankAccount(null);
+          } else {
+            setBankAccount(res.data.account[0]);
+          }
         } else {
           setBankAccount(null);
         }
+
+        console.log(bankAccount)
       } catch (err) {
         console.error(err);
         toast.error('Failed to fetch bank details');
@@ -63,7 +70,7 @@ const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) =>
       </div>
 
       <div className="px-4 space-y-6">
-        {bankAccount ? (
+        {bankAccount !== null ? (
           <>
             {/* Bank Details */}
             <div className="bg-white/20 backdrop-blur-sm rounded-3xl p-6 text-center">
