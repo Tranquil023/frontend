@@ -2,7 +2,16 @@ import React from 'react';
 import { Copy, Eye, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-const PromotionScreen: React.FC<{ currentUser: any }> = ({ currentUser }) => {
+interface User {
+  id: string;
+  referral_code?: string;
+}
+
+interface PromotionScreenProps {
+  currentUser: User | null;
+}
+
+const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   const [copied, setCopied] = React.useState(false);
   const [levels, setLevels] = React.useState([
     { id: 1, title: 'First Level', icon: '🥇', rebate: '₹0.00', rebatePercent: '(15%)', quantity: 0, color: 'from-yellow-600 to-orange-600' },
@@ -12,7 +21,9 @@ const PromotionScreen: React.FC<{ currentUser: any }> = ({ currentUser }) => {
   const [totalPeople, setTotalPeople] = React.useState(0);
   const [teamRecharge, setTeamRecharge] = React.useState(0);
 
-  const invitationLink = `${window.location.origin}/register/refcode=${currentUser.referral_code}`;
+  const invitationLink = currentUser?.referral_code 
+    ? `${window.location.origin}/register/refcode=${currentUser.referral_code}`
+    : '';
 
   const handleCopyLink = async () => {
     try {
@@ -33,7 +44,12 @@ const PromotionScreen: React.FC<{ currentUser: any }> = ({ currentUser }) => {
 
   React.useEffect(() => {
     const fetchReferralData = async () => {
-      if (!currentUser?.id) return;
+      if (!currentUser?.id) {
+        setLevels(prev => prev.map(level => ({ ...level, quantity: 0, rebate: '₹0.00' })));
+        setTotalPeople(0);
+        setTeamRecharge(0);
+        return;
+      }
 
       try {
         // Fetch referrals up to level 3
@@ -101,7 +117,7 @@ const PromotionScreen: React.FC<{ currentUser: any }> = ({ currentUser }) => {
               <div className="bg-white rounded-2xl p-3 mb-3">
                 <p className="text-gray-700 text-sm break-all leading-relaxed">{invitationLink}</p>
               </div>
-              <p className="text-gray-500 text-xs">ID: {currentUser.referral_code}</p>
+              <p className="text-gray-500 text-xs">ID: {currentUser?.referral_code || 'N/A'}</p>
             </div>
           </div>
           <button
