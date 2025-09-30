@@ -25,8 +25,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   const [totalPeople, setTotalPeople] = React.useState(0);
   const [teamRecharge, setTeamRecharge] = React.useState(0);
 
-
-  const invitationLink = userData?.referral_code
+  var invitationLink = userData?.referral_code
     ? `${window.location.origin}/register/refcode=${userData.referral_code}`
     : '';
 
@@ -53,13 +52,18 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!currentUser?.id) return;
-      
+
       try {
         setLoading(true);
         const data = await getUserData();
         setUserData(data);
         setError(null);
-        // console.log("User data fetched:", data);
+
+        invitationLink = userData?.referral_code
+          ? `${window.location.origin}/register/refcode=${userData.referral_code}`
+          : '';
+        console.log("User data fetched:", data); 
+        console.log("Invitation Link updated:", invitationLink);
       } catch (err) {
         setError('Failed to load user data');
         // console.error('Error fetching user data:', err);
@@ -146,7 +150,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
               <div className="bg-white rounded-2xl p-3 mb-3">
                 <p className="text-gray-700 text-sm break-all leading-relaxed">{invitationLink}</p>
               </div>
-                            <p className="text-gray-500 text-xs">ID: {userData?.referral_code || 'N/A'}</p>
+              <p className="text-gray-500 text-xs">ID: {userData?.referral_code || 'N/A'}</p>
             </div>
           </div>
           <button
