@@ -24,52 +24,31 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   ]);
   const [totalPeople, setTotalPeople] = React.useState(0);
   const [teamRecharge, setTeamRecharge] = React.useState(0);
+  const [invitationLink, setInvitationLink] = React.useState('');
 
-  var invitationLink = `https://invest-more-money.vercel.app/register/refcode=${userData?.referral_code}`;
-
-  console.log('Current User:', userData);
-  console.log('Invitation Link:', invitationLink);
-
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(invitationLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      const textArea = document.createElement('textarea');
-      textArea.value = invitationLink;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!currentUser?.id) return;
-
-      try {
-        setLoading(true);
-        const data = await getUserData();
-        setUserData(data);
-        setError(null);
-
-        invitationLink = `https://invest-more-money.vercel.app/register/refcode=${userData.referral_code}`;
-        console.log("User data fetched:", data); 
-        console.log("Invitation Link updated:", invitationLink);
-      } catch (err) {
-        setError('Failed to load user data');
-        // console.error('Error fetching user data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [currentUser?.id]);
+      const fetchUserData = async () => {
+        try {
+          setLoading(true);
+          const user = await getUserData();
+          const data = user.data;
+          setUserData(data);
+          setError(null);
+          // console.log("user: ", userData);
+          if (userData?.referral_code) {
+            setInvitationLink(`https://invest-more-money.vercel.app/register/refcode=${userData.referral_code}`);
+          }
+        } catch (err) {
+          setError('Failed to load user data');
+          // console.error('Error:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchUserData();
+    }, [userData]);
 
   React.useEffect(() => {
     const fetchReferralData = async () => {
@@ -117,6 +96,23 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
 
     fetchReferralData();
   }, [currentUser]);
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(invitationLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textArea = document.createElement('textarea');
+      textArea.value = invitationLink;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600 pb-20">
