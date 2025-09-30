@@ -6,43 +6,53 @@ interface WithdrawalRecordScreenProps {
 }
 
 const WithdrawalRecordScreen: React.FC<WithdrawalRecordScreenProps> = ({ onBack }) => {
-  const withdrawalRecords = [
-    {
-      id: 1,
-      amount: '₹5000',
-      date: '2025-01-14',
-      time: '02:30 PM',
-      status: 'Completed',
-      transactionId: 'WD001234567',
-      bankAccount: '****1234'
-    },
-    {
-      id: 2,
-      amount: '₹3000',
-      date: '2025-01-12',
-      time: '11:15 AM',
-      status: 'Completed',
-      transactionId: 'WD001234566',
-      bankAccount: '****1234'
-    },
-    {
-      id: 3,
-      amount: '₹2500',
-      date: '2025-01-10',
-      time: '04:45 PM',
-      status: 'Processing',
-      transactionId: 'WD001234565',
-      bankAccount: '****1234'
-    },
-    {
-      id: 4,
-      amount: '₹1800',
-      date: '2025-01-08',
-      time: '10:20 AM',
-      status: 'Completed',
-      transactionId: 'WD001234564',
-      bankAccount: '****1234'
-    }
+  interface WithdrawalRecord {
+    id: number;
+    amount: string;
+    date: string;
+    time: string;
+    status: string;
+    transactionId: string;
+    bankAccount: string;
+  }
+
+  const withdrawalRecords: WithdrawalRecord[] = [
+    // {
+    //   id: 1,
+    //   amount: '₹5000',
+    //   date: '2025-01-14',
+    //   time: '02:30 PM',
+    //   status: 'Completed',
+    //   transactionId: 'WD001234567',
+    //   bankAccount: '****1234'
+    // },
+    // {
+    //   id: 2,
+    //   amount: '₹3000',
+    //   date: '2025-01-12',
+    //   time: '11:15 AM',
+    //   status: 'Completed',
+    //   transactionId: 'WD001234566',
+    //   bankAccount: '****1234'
+    // },
+    // {
+    //   id: 3,
+    //   amount: '₹2500',
+    //   date: '2025-01-10',
+    //   time: '04:45 PM',
+    //   status: 'Processing',
+    //   transactionId: 'WD001234565',
+    //   bankAccount: '****1234'
+    // },
+    // {
+    //   id: 4,
+    //   amount: '₹1800',
+    //   date: '2025-01-08',
+    //   time: '10:20 AM',
+    //   status: 'Completed',
+    //   transactionId: 'WD001234564',
+    //   bankAccount: '****1234'
+    // }
   ];
 
   const totalWithdrawn = withdrawalRecords
