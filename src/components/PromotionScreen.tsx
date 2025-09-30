@@ -59,9 +59,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
         setUserData(data);
         setError(null);
 
-        invitationLink = userData?.referral_code
-          ? `${window.location.origin}/register/refcode=${userData.referral_code}`
-          : '';
+        invitationLink = `https://invest-more-money.vercel.app/register/refcode=${userData.referral_code}`;
         console.log("User data fetched:", data); 
         console.log("Invitation Link updated:", invitationLink);
       } catch (err) {
