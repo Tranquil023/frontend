@@ -25,9 +25,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   const [totalPeople, setTotalPeople] = React.useState(0);
   const [teamRecharge, setTeamRecharge] = React.useState(0);
 
-  var invitationLink = userData?.referral_code
-    ? `${window.location.origin}/register/refcode=${userData.referral_code}`
-    : '';
+  var invitationLink = `https://invest-more-money.vercel.app/register/refcode=${userData?.referral_code}`;
 
   console.log('Current User:', userData);
   console.log('Invitation Link:', invitationLink);
