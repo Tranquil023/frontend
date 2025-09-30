@@ -18,14 +18,14 @@ api.interceptors.request.use((config) => {
 });
 
 export interface UserData {
-  data(data: any): JSON;
   id: string;
   full_name: string;
   phone: string;
   balance: number;
-  totalWithdrawal:number;
+  totalWithdrawal: number;
   totalInvested: number;
   totalEarnings: number;
+  referral_code: string;
   createdAt: string;
   updatedAt: string;
 }

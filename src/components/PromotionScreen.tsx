@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Copy, Eye, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { getUserData, UserData } from '../services/payment';
 
 interface User {
   id: string;
@@ -13,6 +14,9 @@ interface PromotionScreenProps {
 
 const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   const [copied, setCopied] = React.useState(false);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [levels, setLevels] = React.useState([
     { id: 1, title: 'First Level', icon: '🥇', rebate: '₹0.00', rebatePercent: '(15%)', quantity: 0, color: 'from-yellow-600 to-orange-600' },
     { id: 2, title: 'Second Level', icon: '🥈', rebate: '0%', rebatePercent: '', quantity: 0, color: 'from-yellow-700 to-orange-700' },
@@ -21,9 +25,13 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   const [totalPeople, setTotalPeople] = React.useState(0);
   const [teamRecharge, setTeamRecharge] = React.useState(0);
 
-  const invitationLink = currentUser?.referral_code 
-    ? `${window.location.origin}/register/refcode=${currentUser.referral_code}`
+
+  const invitationLink = userData?.referral_code
+    ? `${window.location.origin}/register/refcode=${userData.referral_code}`
     : '';
+
+  console.log('Current User:', userData);
+  console.log('Invitation Link:', invitationLink);
 
   const handleCopyLink = async () => {
     try {
@@ -41,6 +49,27 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
       setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!currentUser?.id) return;
+      
+      try {
+        setLoading(true);
+        const data = await getUserData();
+        setUserData(data);
+        setError(null);
+        // console.log("User data fetched:", data);
+      } catch (err) {
+        setError('Failed to load user data');
+        // console.error('Error fetching user data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [currentUser?.id]);
 
   React.useEffect(() => {
     const fetchReferralData = async () => {
@@ -117,7 +146,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
               <div className="bg-white rounded-2xl p-3 mb-3">
                 <p className="text-gray-700 text-sm break-all leading-relaxed">{invitationLink}</p>
               </div>
-              <p className="text-gray-500 text-xs">ID: {currentUser?.referral_code || 'N/A'}</p>
+                            <p className="text-gray-500 text-xs">ID: {userData?.referral_code || 'N/A'}</p>
             </div>
           </div>
           <button
