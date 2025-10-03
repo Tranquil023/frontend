@@ -1,12 +1,20 @@
 import React from 'react';
 import { ArrowLeft, TrendingUp, Calendar, Coins } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface IncomeRecordScreenProps {
-  onBack: () => void;
-}
+const IncomeRecordScreen: React.FC = () => {
+  const navigate = useNavigate();
+  interface IncomeRecord {
+    id: number;
+    type: string;
+    amount: string;
+    date: string;
+    time: string;
+    status: string;
+    plan: string;
+  }
 
-const IncomeRecordScreen: React.FC<IncomeRecordScreenProps> = ({ onBack }) => {
-  const incomeRecords = [
+  const incomeRecords: IncomeRecord[] = [
     // {
     //   id: 1,
     //   type: 'Investment Return',
@@ -55,7 +63,7 @@ const IncomeRecordScreen: React.FC<IncomeRecordScreenProps> = ({ onBack }) => {
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />

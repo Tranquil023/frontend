@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import { Phone, Lock, Send, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import authApi from '../services/auth';
+import { useAuth } from '../contexts/AuthContext';
 
-interface LoginScreenProps {
-  onLogin: (token: string, user: { id: string; full_name?: string; phone: string }) => void;
-  onRegister: () => void;
-}
-
-const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onRegister }) => {
+const LoginScreen: React.FC = () => {
+  const navigate = useNavigate();
+  const { setAuthData } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showPasswordSaved, setShowPasswordSaved] = useState(false);
@@ -31,9 +30,10 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onRegister }) => {
     // Optional: display temporary success UI before setting auth state
     setShowPasswordSaved(true);
 
-    // Delay calling onLogin so the success message (or animation) shows briefly
+    // Store auth data and navigate after a brief delay
     setTimeout(() => {
-      onLogin(response.token, response.user);
+      setAuthData(response.token, response.user);
+      navigate('/home');
     }, 1000);
 
   } catch (err) {
@@ -127,7 +127,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onRegister }) => {
           {/* Register Link */}
           <div className="text-center">
             <button 
-              onClick={onRegister}
+              onClick={() => navigate('/register')}
               className="text-gray-600 hover:text-gray-800 transition-colors"
             >
               <span className="font-medium">Don't have an account?</span>

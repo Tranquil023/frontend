@@ -1,11 +1,9 @@
 import React from 'react';
 import { ArrowLeft, ArrowDownToLine, Calendar, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface WithdrawalRecordScreenProps {
-  onBack: () => void;
-}
-
-const WithdrawalRecordScreen: React.FC<WithdrawalRecordScreenProps> = ({ onBack }) => {
+const WithdrawalRecordScreen: React.FC = () => {
+  const navigate = useNavigate();
   interface WithdrawalRecord {
     id: number;
     amount: string;
@@ -77,7 +75,7 @@ const WithdrawalRecordScreen: React.FC<WithdrawalRecordScreenProps> = ({ onBack 
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />

@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Globe, Bell, Settings, MessageCircle, CreditCard, ArrowDownToLine, TrendingUp } from 'lucide-react';
 import Logo from './Logo';
 import NotificationModal from './NotificationModal';
 
-interface HomeScreenProps {
-  onNavigateToRecharge: () => void;
-  onNavigateToWithdraw: () => void;
-  onNavigateToContact: () => void;
-  onNavigateToCheckIn: () => void;
-  onNavigateToInvest: (plan?: any) => void;
-}
-
-const HomeScreen: React.FC<HomeScreenProps> = ({ 
-  onNavigateToRecharge, 
-  onNavigateToWithdraw, 
-  onNavigateToContact, 
-  onNavigateToCheckIn,
-  onNavigateToInvest 
-}) => {
+const HomeScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
 
   const actionButtons = [
-    { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: "" },
-    { icon: MessageCircle, label: 'contact', color: 'from-purple-500 to-purple-600', onClick: onNavigateToContact },
-    { icon: CreditCard, label: 'Recharge', color: 'from-green-500 to-green-600', onClick: onNavigateToRecharge },
-    { icon: ArrowDownToLine, label: 'withdraw', color: 'from-orange-500 to-orange-600', onClick: onNavigateToWithdraw },
+    { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: () => navigate('/') },
+    { icon: MessageCircle, label: 'contact', color: 'from-purple-500 to-purple-600', onClick: () => navigate('/contact') },
+    { icon: CreditCard, label: 'Recharge', color: 'from-green-500 to-green-600', onClick: () => navigate('/recharge') },
+    { icon: ArrowDownToLine, label: 'withdraw', color: 'from-orange-500 to-orange-600', onClick: () => navigate('/withdraw') },
   ];
 
   const specialPlan = {
@@ -116,7 +104,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold text-gray-800">Price: ₹775</div>
             <button 
-              onClick={() => onNavigateToInvest(specialPlan)}
+              onClick={() => navigate('/invest', { state: { plan: specialPlan } })}
               className="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition-colors duration-200 shadow-lg"
             >
               Invest

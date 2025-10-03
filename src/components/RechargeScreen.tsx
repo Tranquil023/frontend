@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Lock, Coins, Wallet, TrendingUp } from 'lucide-react';
-import Payment from './Payment';
+import { useNavigate } from 'react-router-dom';
 import { getUserData } from '../services/payment';
-import type { UserData, Transaction } from '../services/payment';
+import type { UserData } from '../services/payment';
 
-interface RechargeScreenProps {
-  onBack: () => void;
-}
-
-const RechargeScreen: React.FC<RechargeScreenProps> = ({ onBack }) => {
+const RechargeScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState('');
   const [showPayment, setShowPayment] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   const quickAmounts = [285, 550, 775, 1255, 1999, 2500, 3600, 4900, 7499];
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const user = await getUserData();
-        const data=user.data;
+        const {data} = await getUserData();
         setUserData(data);
         setError(null);
       } catch (err) {
@@ -36,22 +32,18 @@ const RechargeScreen: React.FC<RechargeScreenProps> = ({ onBack }) => {
     fetchUserData();
   }, []);
 
-  return showPayment ? (
-    <Payment 
-      amount={amount}
-      onBack={() => setShowPayment(false)}
-      onPaymentComplete={() => {
-        setShowPayment(false);
-        setAmount('');
-        // You can add any success notification here
-      }}
-    />
-  ) : (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-600 via-blue-500 to-blue-600">
+  const handlePayment = () => {
+    if (amount) {
+      navigate('/payment', { state: { amount } });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-yellow-600 via-blue-500 to-blue-600 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -99,13 +91,7 @@ const RechargeScreen: React.FC<RechargeScreenProps> = ({ onBack }) => {
                 </div>
               </div>
 
-              {userData?.recentTransactions && userData.recentTransactions.length > 0 && (
-                <div className="text-xs text-gray-500 mt-2">
-                  Recent: {userData.recentTransactions.slice(0, 3).map(t => 
-                    `${t.type === 'credit' ? '+' : '-'}₹${t.amount}`
-                  ).join(', ')}
-                </div>
-              )}
+              {/* Recent transactions section - Remove for now */}
             </div>
           )}
         </div>
@@ -139,7 +125,7 @@ const RechargeScreen: React.FC<RechargeScreenProps> = ({ onBack }) => {
         </div>
 
         {/* Payment Method */}
-        <button 
+        <button
           className="w-full bg-black hover:bg-gray-800 text-white font-bold py-4 rounded-2xl transition-colors duration-200 flex items-center justify-center space-x-2 shadow-lg"
           onClick={() => amount && setShowPayment(true)}
           disabled={!amount}
@@ -149,9 +135,9 @@ const RechargeScreen: React.FC<RechargeScreenProps> = ({ onBack }) => {
         </button>
 
         {/* Recharge Button */}
-        <button 
+        <button
           className="w-full bg-black hover:bg-gray-800 text-white font-bold py-4 rounded-2xl transition-colors duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={() => amount && setShowPayment(true)}
+          onClick={handlePayment}
           disabled={!amount}
         >
           Recharge Now

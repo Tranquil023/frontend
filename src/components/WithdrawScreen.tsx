@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, FileText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { api } from '../services/payment';
 
-interface WithdrawScreenProps {
-  onBack: () => void;
-  onAddBank: () => void; // callback to navigate to BankDetailsScreen
-}
-
-const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) => {
+const WithdrawScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState('');
   const [bankAccount, setBankAccount] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -40,6 +37,14 @@ const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) =>
     fetchBankDetails();
   }, []);
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  const handleAddBank = () => {
+    navigate('/bank-details');
+  };
+
   const handleWithdraw = async () => {
     if (!amount || parseFloat(amount) <= 0) {
       toast.error('Enter a valid amount');
@@ -59,10 +64,10 @@ const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) =>
   if (loading) return <div className="p-4 text-center text-white">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
-        <button onClick={onBack} className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+        <button onClick={handleBack} className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
           <ArrowLeft className="w-6 h-6 text-white" />
         </button>
         <h1 className="text-2xl font-bold text-white">Withdraw</h1>
@@ -105,7 +110,7 @@ const WithdrawScreen: React.FC<WithdrawScreenProps> = ({ onBack, onAddBank }) =>
           <div className="bg-white rounded-3xl p-6 shadow-xl space-y-4">
             <p className="text-red-500 font-medium">You need to add bank details first</p>
             <button
-              onClick={onAddBank} // navigate to BankDetailsScreen
+              onClick={handleAddBank}
               className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
             >
               Add Bank Details

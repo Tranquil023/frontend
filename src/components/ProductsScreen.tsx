@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getUserData } from '../services/payment';
 import type { UserData } from '../services/payment';
 import { toast } from 'react-hot-toast';
 import { Target, TrendingUp } from 'lucide-react';
 import Logo from './Logo';
-
-interface ProductsScreenProps {
-  onNavigateToInvest: (plan: {
-    name: string;
-    price: number;
-    dailyIncome: number;
-    totalIncome: number;
-    duration: string;
-  }) => void;
-}
 
 interface Product {
   id: number;
@@ -25,7 +16,8 @@ interface Product {
   image: string;
 }
 
-const ProductsScreen: React.FC<ProductsScreenProps> = ({ onNavigateToInvest }) => {
+const ProductsScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -80,17 +72,21 @@ const ProductsScreen: React.FC<ProductsScreenProps> = ({ onNavigateToInvest }) =
     
 
     // Pass product details to parent
-    onNavigateToInvest({
-      name: product.name,
-      price: product.price,
-      dailyIncome: product.dailyIncome,
-      totalIncome: product.totalIncome,
-      duration: product.duration,
+    navigate('/invest', {
+      state: {
+        plan: {
+          name: product.name,
+          price: product.price,
+          dailyIncome: product.dailyIncome,
+          totalIncome: product.totalIncome,
+          duration: product.duration,
+        }
+      }
     });
   };
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-white pb-24">
       <div className="bg-[#956630] rounded-b-[40px] p-6 pb-12">
         <h1 className="text-3xl font-bold text-white text-center mb-4">Products List</h1>
       </div>

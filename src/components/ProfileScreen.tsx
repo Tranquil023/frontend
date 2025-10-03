@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Lock, ArrowRight, Info, CreditCard, TrendingUp, TrendingDown, Download, LogOut } from 'lucide-react';
 import Logo from './Logo';
 import { getUserData, UserData } from '../services/payment';
 
-interface ProfileScreenProps {
-  onNavigateToRecharge: () => void;
-  onNavigateToBankDetails: () => void;
-  onNavigateToIncomeRecord: () => void;
-  onNavigateToWithdrawalRecord: () => void;
-}
-
-const ProfileScreen: React.FC<ProfileScreenProps> = ({
-  onNavigateToRecharge,
-  onNavigateToBankDetails,
-  onNavigateToIncomeRecord,
-  onNavigateToWithdrawalRecord
-}) => {
+const ProfileScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const menuItems = [
     { icon: Info, label: 'About Company', arrow: true },
-    { icon: CreditCard, label: 'Add Bank Account', arrow: true, onClick: onNavigateToBankDetails },
-    { icon: TrendingUp, label: 'Income Record', arrow: true, onClick: onNavigateToIncomeRecord },
-    { icon: TrendingDown, label: 'Withdraw Record', arrow: true, onClick: onNavigateToWithdrawalRecord },
+    { icon: CreditCard, label: 'Add Bank Account', arrow: true, onClick: () => navigate('/bank-details') },
+    { icon: TrendingUp, label: 'Income Record', arrow: true, onClick: () => navigate('/income-record') },
+    { icon: TrendingDown, label: 'Withdraw Record', arrow: true, onClick: () => navigate('/withdrawal-record') },
     { icon: Download, label: 'App Download', arrow: true },
   ];
 
@@ -85,8 +75,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({
           <div className="flex items-center justify-between mb-2">
             <span className="text-gray-600 text-lg">Account Balance</span>
             <button
-              onClick={onNavigateToRecharge}
-              className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold py-2 px-6 rounded-full text-sm hover:from-yellow-700 hover:to-orange-700 transition-colors duration-200"
+              onClick={() => navigate('/recharge')}
+              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center space-x-2"
             >
               Recharge ⚡
             </button>

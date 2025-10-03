@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Gift, Calendar, Coins, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface CheckInScreenProps {
-  onBack: () => void;
-}
-
-const CheckInScreen: React.FC<CheckInScreenProps> = ({ onBack }) => {
+const CheckInScreen: React.FC = () => {
+  const navigate = useNavigate();
   const [checkedIn, setCheckedIn] = useState(false);
   const [reward, setReward] = useState(0);
 
@@ -30,7 +28,7 @@ const CheckInScreen: React.FC<CheckInScreenProps> = ({ onBack }) => {
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />

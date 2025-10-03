@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import { Phone, Lock, Send, User, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import authApi from '../services/auth';
+import { useAuth } from '../contexts/AuthContext';
 
-interface RegisterScreenProps {
-  onRegister: () => void;
-  onSwitchToLogin: () => void;
-}
-
-const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToLogin }) => {
+const RegisterScreen: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { setAuthData } = useAuth();
+  
+  // Extract referral code from URL path or query params
+  const urlReferralCode = location.pathname.split('refcode=')[1] || 
+                         new URLSearchParams(location.search).get('refcode');
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -19,14 +23,11 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
   const [isLoading, setIsLoading] = useState(false);
   const [referralCode, setReferralCode] = useState('');
 
-  React.useEffect(() => {
-    // Get referral code from URL
-    const path = window.location.pathname;
-    const refCodeMatch = path.match(/\/register\/refcode=([A-Za-z0-9]+)/);
-    if (refCodeMatch && refCodeMatch[1]) {
-      setReferralCode(refCodeMatch[1]);
+  useEffect(() => {
+    if (urlReferralCode) {
+      setReferralCode(urlReferralCode);
     }
-  }, []);
+  }, [urlReferralCode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,12 +43,10 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
         referred_by: referralCode || undefined,
       });
 
-      // Store the JWT token
-      localStorage.setItem('token', response.token);
-
       setShowRegistrationSuccess(true);
       setTimeout(() => {
-        onRegister();
+        setAuthData(response.token, response.user);
+        navigate('/home');
       }, 1000);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
@@ -181,7 +180,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onRegister, onSwitchToL
           {/* Login Link */}
           <div className="text-center">
             <button 
-              onClick={onSwitchToLogin}
+              onClick={() => navigate('/login')}
               className="text-gray-600 hover:text-gray-800 transition-colors"
             >
               <span className="font-medium">Already have an account?</span>

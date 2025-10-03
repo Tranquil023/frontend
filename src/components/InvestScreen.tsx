@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ArrowLeft, TrendingUp, Clock, Target, CheckCircle, AlertCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { investMoney } from '../services/payment';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-interface InvestScreenProps {
-  onBack: () => void;
+interface LocationState {
   plan?: {
     name: string;
     price: number;
@@ -14,7 +14,10 @@ interface InvestScreenProps {
   };
 }
 
-const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
+const InvestScreen: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { plan } = location.state as LocationState || {};
   const [invested, setInvested] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -81,7 +84,7 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
             <p className="text-green-600">Investment: {formatCurrency(currentPlan.price)}</p>
           </div>
           <button
-            onClick={onBack}
+            onClick={() => navigate('/home')}
             className="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
           >
             Back to Home
@@ -92,11 +95,11 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-gradient-to-b from-purple-400 via-blue-500 to-blue-600 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />
@@ -105,7 +108,7 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
         <div className="w-10"></div>
       </div>
 
-      <div className="px-4 space-y-6">
+      <div className="px-4 space-y-6 pb-6">
         {/* Plan Details */}
         <div className="bg-white rounded-3xl p-6 shadow-xl">
           <div className="flex items-center space-x-3 mb-4">
@@ -143,7 +146,7 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Expected Daily Return</span>
-              <span className="font-semibold text-green-600">{formatCurrency(currentPlan.dailyProfit)}</span>
+              <span className="font-semibold text-green-600">{formatCurrency(currentPlan.dailyIncome)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Total Expected Return</span>
@@ -180,11 +183,12 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
         </div>
 
         {/* Invest Button */}
-        <button
-          onClick={handleInvest}
-          disabled={loading}
-          className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-bold py-4 rounded-3xl transition-colors duration-200 shadow-lg flex items-center justify-center space-x-2"
-        >
+        <div className="px-4">
+          <button
+            onClick={handleInvest}
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-bold py-4 rounded-3xl transition-colors duration-200 shadow-lg flex items-center justify-center space-x-2"
+          >
           {loading ? (
             <>
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -196,7 +200,8 @@ const InvestScreen: React.FC<InvestScreenProps> = ({ onBack, plan }) => {
               <span>Confirm Investment</span>
             </>
           )}
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   );

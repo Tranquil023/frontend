@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Copy, AlertTriangle } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { initiatePayment, verifyPayment } from '../services/payment';
 
-interface PaymentProps {
+interface LocationState {
   amount: string;
-  onBack: () => void;
-  onPaymentComplete: () => void;
 }
 
-const Payment: React.FC<PaymentProps> = ({ amount, onBack, onPaymentComplete }) => {
+const Payment: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { amount } = location.state as LocationState;
   const [timer, setTimer] = useState(480); // 8 minutes in seconds
   const [activeTab, setActiveTab] = useState<'direct' | 'qr'>('direct');
   const [paymentMethod, setPaymentMethod] = useState<'paytm' | 'phonepe' | null>(null);
@@ -79,7 +81,7 @@ const Payment: React.FC<PaymentProps> = ({ amount, onBack, onPaymentComplete }) 
     try {
       // Verify payment with backend
       await verifyPayment(amount, utrNumber, paymentMethod);
-      onPaymentComplete();
+      navigate('/home');
     } catch (err) {
       setError('Failed to verify payment. Please try again.');
     } finally {
@@ -91,7 +93,7 @@ const Payment: React.FC<PaymentProps> = ({ amount, onBack, onPaymentComplete }) 
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-purple-600">
-        <button onClick={onBack} className="text-white">
+        <button onClick={() => navigate(-1)} className="text-white">
           <ArrowLeft className="w-6 h-6" />
         </button>
         <h1 className="text-xl font-medium text-white">Pay</h1>

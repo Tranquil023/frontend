@@ -2,21 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Copy, Eye, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { getUserData, UserData } from '../services/payment';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-interface User {
-  id: string;
-  referral_code?: string;
-}
-
-interface PromotionScreenProps {
-  currentUser: User | null;
-}
-
-const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
+const PromotionScreen: React.FC = () => {
+  const { user } = useAuth();
   const [copied, setCopied] = React.useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [levels, setLevels] = React.useState([
     { id: 1, title: 'First Level', icon: '🥇', rebate: '₹0.00', rebatePercent: '(15%)', quantity: 0, color: 'from-yellow-600 to-orange-600' },
     { id: 2, title: 'Second Level', icon: '🥈', rebate: '0%', rebatePercent: '', quantity: 0, color: 'from-yellow-700 to-orange-700' },
@@ -30,29 +22,24 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   useEffect(() => {
       const fetchUserData = async () => {
         try {
-          setLoading(true);
-          const user = await getUserData();
-          const data = user.data;
+          const {data} = await getUserData();
+          console.log("user: ",data)
           setUserData(data);
-          setError(null);
-          // console.log("user: ", userData);
-          if (userData?.referral_code) {
-            setInvitationLink(`https://invest-more-money.vercel.app/register/refcode=${userData.referral_code}`);
+          if (data?.referral_code) {
+            const baseUrl = 'https://invest-more-money.vercel.app/';
+            setInvitationLink(`${baseUrl}/register/refcode=${data.referral_code}`);
           }
         } catch (err) {
-          setError('Failed to load user data');
-          // console.error('Error:', err);
-        } finally {
-          setLoading(false);
+          console.error('Error:', err);
         }
       };
   
       fetchUserData();
-    }, [userData]);
+    }, []);
 
   React.useEffect(() => {
     const fetchReferralData = async () => {
-      if (!currentUser?.id) {
+      if (!user?.id) {
         setLevels(prev => prev.map(level => ({ ...level, quantity: 0, rebate: '₹0.00' })));
         setTotalPeople(0);
         setTeamRecharge(0);
@@ -64,7 +51,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
         const { data: referrals } = await supabase
           .from('referrals')
           .select('level, referred_id')
-          .eq('referrer_id', currentUser.id);
+          .eq('referrer_id', user.id);
 
         const levelCounts = [0, 0, 0];
         referrals?.forEach(r => {
@@ -95,7 +82,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
     };
 
     fetchReferralData();
-  }, [currentUser]);
+  }, [user]);
 
   const handleCopyLink = async () => {
     try {
@@ -115,7 +102,7 @@ const PromotionScreen: React.FC<PromotionScreenProps> = ({ currentUser }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600 pb-24">
       <div className="text-center p-4 pt-8 mb-6">
         <h1 className="text-2xl font-bold text-white">Promotion</h1>
       </div>
