@@ -11,9 +11,6 @@ const RegisterScreen: React.FC = () => {
   const location = useLocation();
   const { setAuthData } = useAuth();
   
-  // Extract referral code from URL path or query params
-  const urlReferralCode = location.pathname.split('refcode=')[1] || 
-                         new URLSearchParams(location.search).get('refcode');
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -24,10 +21,14 @@ const RegisterScreen: React.FC = () => {
   const [referralCode, setReferralCode] = useState('');
 
   useEffect(() => {
-    if (urlReferralCode) {
-      setReferralCode(urlReferralCode);
+    // Get code from URL path
+    const pathParts = location.pathname.split('/');
+    const code = pathParts[pathParts.length - 1];
+    
+    if (code && code !== 'register') {
+      setReferralCode(code);
     }
-  }, [urlReferralCode]);
+  }, [location.pathname]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
