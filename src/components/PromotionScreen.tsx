@@ -26,7 +26,7 @@ const PromotionScreen: React.FC = () => {
           console.log("user: ",data)
           setUserData(data);
           if (data?.referral_code) {
-            const baseUrl = 'https://invest-more-money.vercel.app/';
+            const baseUrl = 'https://invest-more-money.vercel.app';
             setInvitationLink(`${baseUrl}/register/refcode=${data.referral_code}`);
           }
         } catch (err) {
