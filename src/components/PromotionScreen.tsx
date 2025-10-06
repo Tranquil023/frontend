@@ -23,11 +23,12 @@ const PromotionScreen: React.FC = () => {
       const fetchUserData = async () => {
         try {
           const {data} = await getUserData();
-          console.log("user: ",data)
+          // console.log("user: ",data)
           setUserData(data);
           if (data?.referral_code) {
-            const baseUrl = 'https://invest-more-money.vercel.app';
-            setInvitationLink(`${baseUrl}/register/refcode=${data.referral_code}`);
+            const baseUrl = window.location.origin;
+            setInvitationLink(`${baseUrl}/register/${data.referral_code}`);
+            console.log(baseUrl)
           }
         } catch (err) {
           console.error('Error:', err);

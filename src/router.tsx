@@ -136,7 +136,7 @@ export const router = createBrowserRouter([
         element: <RegisterScreen />,
       },
       {
-        path: '/register/refcode=:code',
+        path: '/register/:code',
         element: <RegisterScreen />,
       },
       {
