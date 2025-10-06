@@ -55,13 +55,26 @@ const Payment: React.FC = () => {
     try {
       setPaymentMethod(method);
       // Initiate payment with backend
-      await initiatePayment(amount, method);
+      // await initiatePayment(amount, method);
+      
+      // Create UPI deep link
+      const upiLink = `upi://pay?pa=${UPI_ID}&pn=Merchant&am=${amount}&cu=INR`;
       
       // Open the appropriate payment app
       if (method === 'paytm') {
-        window.location.href = `paytmmp://pay?pa=${UPI_ID}&pn=Merchant&am=${amount}&cu=INR`;
+        // Try to open Paytm app first
+        window.location.href = `paytm://upi/pay?pa=${UPI_ID}&pn=Merchant&am=${amount}&cu=INR`;
+        // Fallback to Paytm website after a short delay if app doesn't open
+        setTimeout(() => {
+          window.location.href = `https://paytm.com/webview/paynow?payment_link=${encodeURIComponent(upiLink)}`;
+        }, 1000);
       } else if (method === 'phonepe') {
+        // Try to open PhonePe app first
         window.location.href = `phonepe://pay?pa=${UPI_ID}&pn=Merchant&am=${amount}&cu=INR`;
+        // Fallback to PhonePe website after a short delay if app doesn't open
+        setTimeout(() => {
+          window.location.href = `https://phon.pe/ru_${encodeURIComponent(UPI_ID)}?am=${amount}`;
+        }, 1000);
       }
     } catch (err) {
       setError('Failed to initiate payment. Please try again.');
