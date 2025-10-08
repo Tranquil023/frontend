@@ -31,40 +31,39 @@ const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose }
         <div className="space-y-3 text-sm text-gray-700 mb-6">
           <p>
             <span className="font-semibold">1.Platform launch time:</span>{' '}
-            <span className="text-green-600 font-semibold">September 16 - 2025</span>
+            <span className="text-green-600 font-semibold">October 8 - 2025</span>
+          </p>
+          
+          <p>
+            <span className="font-semibold">2.Daily Gift Code:</span>{' '}
+            <span className="text-green-600 font-semibold">₹8 to 300₹ ( Need Plan )</span>
           </p>
           <p>
-            <span className="font-semibold">2.Per Referals:</span>{' '}
-            <span className="text-green-600 font-semibold">₹8 (Unlimited)</span>
-          </p>
-          <p>
-            <span className="font-semibold">3.Daily Gift Code:</span>{' '}
-            <span className="text-green-600 font-semibold">₹8 to 300₹ ( no Need Plan )</span>
-          </p>
-          <p>
-            <span className="font-semibold">4.Level 3 agent commission cashback:</span>
+            <span className="font-semibold">3.Level 3 agent commission cashback:</span>
           </p>
           <p>
             <span className="font-semibold">1st Level:</span>{' '}
             <span className="text-green-600 font-semibold">15% Happy Earning</span>
           </p>
           <p>
-            <span className="font-semibold">5. Income:</span> Daily Income Daily Withdrawal
+            <span className="font-semibold">4. Income:</span> Daily Income Daily Withdrawal
           </p>
           <p>
-            <span className="font-semibold">6.Minimum Withdrawal is:</span>{' '}
+            <span className="font-semibold">5. Minimum Withdrawal is:</span>{' '}
             <span className="text-green-600 font-semibold">₹170 - ₹10000</span> .
           </p>
           <p>
-            <span className="font-semibold">7.Get your referral to invest in welfare and get direct 15% of his investment.</span>
+            <span className="font-semibold">6.Get your referral to invest in welfare and get direct 15% of his investment.</span>
           </p>
           <p>
-            <span className="font-semibold">8.Number of withdrawals:</span>{' '}
+            <span className="font-semibold">7.Number of withdrawals:</span>{' '}
             <span className="text-green-600 font-semibold">Unlimited</span> .
           </p>
         </div>
 
-        <button className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-2xl transition-colors duration-200 flex items-center justify-center space-x-2">
+        <button className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-2xl transition-colors duration-200 flex items-center justify-center space-x-2" onClick={() => {
+          window.open('https://t.me/invest_officially', '_blank');
+        }}>
           <Send className="w-5 h-5" />
           <span>Telegram Channel</span>
         </button>

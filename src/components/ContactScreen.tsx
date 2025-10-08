@@ -11,7 +11,8 @@ const ContactScreen: React.FC = () => {
       description: 'Get instant support from our team and community members for any questions or issues you might have.',
       icon: Send,
       color: 'from-blue-500 to-blue-600',
-      buttonText: 'Contact Now'
+      buttonText: 'Contact Now',
+      link: 'https://t.me/CallmeTranquil'
     },
     {
       id: 2,
@@ -19,16 +20,10 @@ const ContactScreen: React.FC = () => {
       description: 'Stay updated with our latest news, announcements, and exclusive content through our Telegram channel.',
       icon: Send,
       color: 'from-blue-500 to-blue-600',
-      buttonText: 'Join Now'
+      buttonText: 'Join Now',
+      link: 'https://t.me/invest_officially'
     },
-    {
-      id: 3,
-      name: 'WhatsApp Group',
-      description: 'Connect with other members in real-time, share ideas, and get community support on WhatsApp.',
-      icon: MessageCircle,
-      color: 'from-green-500 to-green-600',
-      buttonText: 'Join Group'
-    }
+    
   ];
 
   return (
@@ -61,7 +56,9 @@ const ContactScreen: React.FC = () => {
                   {community.description}
                 </p>
                 
-                <button className={`w-full bg-gradient-to-r ${community.color} hover:opacity-90 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-[1.02]`}>
+                <button className={`w-full bg-gradient-to-r ${community.color} hover:opacity-90 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-[1.02]`} onClick={() => {
+                  window.open(community.link, '_blank');
+                }}>
                   {community.buttonText}
                 </button>
               </div>

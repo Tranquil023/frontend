@@ -14,13 +14,13 @@ const CheckInScreen: React.FC = () => {
   };
 
   const checkInDays = [
-    { day: 1, reward: '₹8-50', completed: true },
-    { day: 2, reward: '₹15-75', completed: true },
-    { day: 3, reward: '₹25-100', completed: false, today: true },
-    { day: 4, reward: '₹35-150', completed: false },
-    { day: 5, reward: '₹50-200', completed: false },
-    { day: 6, reward: '₹75-250', completed: false },
-    { day: 7, reward: '₹100-300', completed: false },
+    { day: 1, reward: '₹1-3', completed: true },
+    { day: 2, reward: '₹3-9', completed: true },
+    { day: 3, reward: '₹10-14', completed: false, today: true },
+    { day: 4, reward: '₹14-16', completed: false },
+    { day: 5, reward: '₹10-17', completed: false },
+    { day: 6, reward: '₹15-20', completed: false },
+    { day: 7, reward: '₹20-25', completed: false },
   ];
 
   return (

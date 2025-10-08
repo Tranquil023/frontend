@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Globe, Bell, Settings, MessageCircle, CreditCard, ArrowDownToLine, TrendingUp } from 'lucide-react';
 import Logo from './Logo';
@@ -7,6 +7,14 @@ import NotificationModal from './NotificationModal';
 const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
+
+  useEffect(() => {
+    // Check if this is first visit or reload
+    if (!sessionStorage.getItem('notificationShown')) {
+      setShowNotification(true);
+      sessionStorage.setItem('notificationShown', 'true');
+    }
+  }, []);
 
   const actionButtons = [
     { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: () => navigate('/') },
