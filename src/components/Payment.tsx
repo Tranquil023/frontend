@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Copy, AlertTriangle } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { initiatePayment, verifyPayment } from '../services/payment';
+import { api } from '../services/payment';
 
 interface LocationState {
   amount: string;
@@ -19,7 +19,7 @@ const Payment: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const UPI_ID = 'prashantkashyap2707-1@okaxis';
+  const UPI_ID = 'investmore@freecharge';
   const qrValue = `upi://pay?pa=${UPI_ID}&pn=Merchant&am=${amount}&cu=INR`;
 
   useEffect(() => {
@@ -92,11 +92,17 @@ const Payment: React.FC = () => {
     setError(null);
 
     try {
-      // Verify payment with backend
-      await verifyPayment(amount, utrNumber, paymentMethod);
+      // Add income record with backend
+      await api.post('/users/add-income-record', {
+        amount,
+        transaction_id: utrNumber,
+        payment_method: paymentMethod,
+        type: 'Recharge',
+        status: 'Pending'
+      });
       navigate('/home');
     } catch (err) {
-      setError('Failed to verify payment. Please try again.');
+      setError('Failed to record payment. Please try again.');
     } finally {
       setSubmitting(false);
     }
