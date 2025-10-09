@@ -48,7 +48,7 @@ const WithdrawalRecordScreen: React.FC = () => {
             time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             status: record.status,
             transaction_id: record.id || 'Pending',
-            account_number: record.bank_account_id ? record.bank_account_id.slice(-4) : '****',
+            account_number: record.bank_account_id ? "**" : '****',
             created_at: record.created_at
           };
         });
