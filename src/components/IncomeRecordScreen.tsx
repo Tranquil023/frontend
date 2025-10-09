@@ -29,10 +29,8 @@ const IncomeRecordScreen: React.FC = () => {
         
         console.log('API Response:', response.data);
         
-        // Make sure we have an array of records
-        const records = Array.isArray(response.data) ? response.data 
-                     : Array.isArray(response.data.data) ? response.data.data 
-                     : [];
+        // Get the records from the nested data structure
+        const records = response.data?.data?.data || [];
         
         console.log('Processed Records:', records);
         // Transform the data to match our interface
