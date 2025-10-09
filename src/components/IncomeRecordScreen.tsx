@@ -27,10 +27,14 @@ const IncomeRecordScreen: React.FC = () => {
         setLoading(true);
         const response = await api.get('/users/income-records');
         
-        // Extract records from the nested data property
-        const records = response.data.data || [];
+        console.log('API Response:', response.data);
         
-        console.log(records);
+        // Make sure we have an array of records
+        const records = Array.isArray(response.data) ? response.data 
+                     : Array.isArray(response.data.data) ? response.data.data 
+                     : [];
+        
+        console.log('Processed Records:', records);
         // Transform the data to match our interface
         const formattedRecords = records.map((record: any) => {
           const date = new Date(record.created_at);
@@ -138,7 +142,7 @@ const IncomeRecordScreen: React.FC = () => {
             </div>
 
             {/* Summary Stats */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 text-white">
+            {/* <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 text-white">
               <h3 className="font-bold mb-4">This Month Summary</h3>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
@@ -150,7 +154,7 @@ const IncomeRecordScreen: React.FC = () => {
                   <div className="text-sm opacity-90">Transactions</div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>

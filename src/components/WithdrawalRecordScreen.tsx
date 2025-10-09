@@ -27,10 +27,14 @@ const WithdrawalRecordScreen: React.FC = () => {
         setLoading(true);
         const response = await api.get('/users/withdraw-Records');
         
-        // Extract records from the nested data property
-        const records = response.data.data || [];
+        console.log('API Response:', response.data);
         
-        console.log(records);
+        // Make sure we have an array of records
+        const records = Array.isArray(response.data) ? response.data 
+                     : Array.isArray(response.data.data) ? response.data.data 
+                     : [];
+        
+        console.log('Processed Records:', records);
         // Transform the data to match our interface
         const formattedRecords = records.map((record: any) => {
           const date = new Date(record.created_at);
