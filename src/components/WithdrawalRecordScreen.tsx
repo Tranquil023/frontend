@@ -30,7 +30,12 @@ const WithdrawalRecordScreen: React.FC = () => {
         console.log('API Response:', response.data);
         
         // Get the records from the nested data structure
-        const records = response.data?.data?.data || [];
+        const records = response.data?.data || [];
+        
+        if (!Array.isArray(records)) {
+          console.error('Records is not an array:', records);
+          throw new Error('Invalid data format received from server');
+        }
         
         console.log('Processed Records:', records);
         // Transform the data to match our interface
