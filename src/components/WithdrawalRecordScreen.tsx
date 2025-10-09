@@ -27,6 +27,7 @@ const WithdrawalRecordScreen: React.FC = () => {
         setLoading(true);
         const response = await api.get('/users/withdraw-Records');
 
+        console.log(response);        
         // Transform the data to match our interface
         const formattedRecords = response.data.map((record: any) => {
           const date = new Date(record.created_at);
@@ -42,6 +43,7 @@ const WithdrawalRecordScreen: React.FC = () => {
           };
         });
 
+        console.log(formattedRecords);
         setWithdrawalRecords(formattedRecords);
         setError(null);
       } catch (err) {
