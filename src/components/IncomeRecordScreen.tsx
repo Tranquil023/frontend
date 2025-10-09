@@ -25,10 +25,14 @@ const IncomeRecordScreen: React.FC = () => {
     const fetchIncomeRecords = async () => {
       try {
         setLoading(true);
-        const response = await api.get('/users/income-Records');
+        const response = await api.get('/users/income-records');
         
+        // Extract records from the nested data property
+        const records = response.data.data || [];
+        
+        console.log(records);
         // Transform the data to match our interface
-        const formattedRecords = response.data.map((record: any) => {
+        const formattedRecords = records.map((record: any) => {
           const date = new Date(record.created_at);
           return {
             id: record.id,
@@ -42,6 +46,7 @@ const IncomeRecordScreen: React.FC = () => {
           };
         });
 
+        console.log(formattedRecords);
         setIncomeRecords(formattedRecords);
         setError(null);
       } catch (err) {
