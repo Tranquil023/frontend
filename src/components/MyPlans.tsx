@@ -27,7 +27,17 @@ export default function MyPlan() {
       setError(null);
       
       const data = await api.get('/users/myPlans');
-      setPlans(data);
+      
+      // Handle different response formats
+      if (Array.isArray(data)) {
+        setPlans(data);
+      } else if (data && Array.isArray(data.plans)) {
+        setPlans(data.plans);
+      } else if (data && Array.isArray(data.data)) {
+        setPlans(data.data);
+      } else {
+        setPlans([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
