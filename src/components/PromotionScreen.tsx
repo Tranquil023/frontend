@@ -77,6 +77,7 @@ const PromotionScreen: React.FC = () => {
 
         const teamTotal = rechargeData?.reduce((sum, t) => sum + Number(t.amount), 0) || 0;
         setTeamRecharge(teamTotal);
+        console.log(rechargeData);
       } catch (err) {
         console.error('Failed to fetch referral data:', err);
       }
