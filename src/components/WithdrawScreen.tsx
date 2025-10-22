@@ -52,7 +52,7 @@ const WithdrawScreen: React.FC = () => {
     }
 
     try {
-      const userDetails = await api.get('/users/details');
+      const userDetails = await api.get('/users/me');
       if (userDetails.data.totalInvested <= 0) {
         toast.error('You need to have an investment before withdrawing');
         return;
