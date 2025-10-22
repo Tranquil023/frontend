@@ -10,7 +10,7 @@ const ProfileScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const menuItems = [
-    { icon: Info, label: 'About Company', arrow: true },
+    { icon: Info, label: 'My Plans', arrow: true, onClick: () => navigate('/my-plans') },
     { icon: CreditCard, label: 'Recharge Records', arrow: true, onClick: () => navigate('/recharge-record') },
     { icon: TrendingUp, label: 'Income Record', arrow: true, onClick: () => navigate('/income-record') },
     { icon: TrendingDown, label: 'Withdraw Record', arrow: true, onClick: () => navigate('/withdrawal-record') },

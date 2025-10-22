@@ -19,6 +19,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ErrorElement from './components/ErrorElement';
 import NotFound from './components/NotFound';
 import RechargeRecordScreen from './components/RechargeRecord';
+import MyPlan from './components/MyPlans';
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +134,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <RechargeRecordScreen />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/my-plans',
+        element: (
+          <ProtectedRoute>
+            <MyPlan />
           </ProtectedRoute>
         ),
       },
