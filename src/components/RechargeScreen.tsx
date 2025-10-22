@@ -36,7 +36,7 @@ const RechargeScreen: React.FC = () => {
   const handlePayment = async () => {
     if (amount) {
       try {
-        const response = await api.post("/recharge-wallet", { amount });
+        const response = await api.post("/users/recharge-wallet", { amount });
         console.log('Payment initiation response:', response);
       } catch (err) {
         console.error('Payment initiation failed:', err);
