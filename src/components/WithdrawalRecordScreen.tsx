@@ -27,7 +27,7 @@ const WithdrawalRecordScreen: React.FC = () => {
         setLoading(true);
         const response = await api.get('/users/withdraw-Records');
         
-        console.log('API Response:', response.data);
+        // console.log('API Response:', response.data);
         
         // Get the records from the nested data structure
         const records = response.data?.data || [];

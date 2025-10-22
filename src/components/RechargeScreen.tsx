@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Lock, Coins, Wallet, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { getUserData } from '../services/payment';
+import { api, getUserData } from '../services/payment';
 import type { UserData } from '../services/payment';
+import toast from 'react-hot-toast';
 
 const RechargeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const RechargeScreen: React.FC = () => {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-        const {data} = await getUserData();
+        const { data } = await getUserData();
         setUserData(data);
         setError(null);
       } catch (err) {
@@ -32,8 +33,16 @@ const RechargeScreen: React.FC = () => {
     fetchUserData();
   }, []);
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (amount) {
+      try {
+        const response = await api.post("/recharge-wallet", { amount });
+        console.log('Payment initiation response:', response);
+      } catch (err) {
+        console.error('Payment initiation failed:', err);
+        toast.error('Failed to initiate payment');
+        return;
+      }
       navigate('/payment', { state: { amount } });
     }
   };

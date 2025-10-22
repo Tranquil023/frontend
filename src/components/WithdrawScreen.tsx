@@ -63,7 +63,7 @@ const WithdrawScreen: React.FC = () => {
       setAmount('');
     } catch (err) {
       console.error(err);
-      toast.error('Failed to request withdrawal');
+      toast.error(err.response?.data?.message || 'Failed to request withdrawal');
     }
   };
 
