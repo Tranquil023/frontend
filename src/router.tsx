@@ -18,6 +18,7 @@ import Payment from './components/Payment';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorElement from './components/ErrorElement';
 import NotFound from './components/NotFound';
+import RechargeRecordScreen from './components/RechargeRecord';
 
 export const router = createBrowserRouter([
   {
@@ -124,6 +125,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <WithdrawalRecordScreen />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/recharge-record',
+        element: (
+          <ProtectedRoute>
+            <RechargeRecordScreen />
           </ProtectedRoute>
         ),
       },
