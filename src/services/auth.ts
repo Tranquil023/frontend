@@ -30,10 +30,15 @@ const authApi = {
     return response.data;
   },
 
-  register: async (data: RegisterData): Promise<AuthResponse> => {
-    const response = await axios.post(`${API_URL}/users/register`, data);
+  register: async (data: RegisterData, referralCode?: string): Promise<AuthResponse> => {
+    const url = referralCode
+      ? `${API_URL}/users/register/${referralCode}`
+      : `${API_URL}/users/register`;
+
+    const response = await axios.post(url, data);
     return response.data;
   }
+
 };
 
 export default authApi;

@@ -10,7 +10,7 @@ const RegisterScreen: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setAuthData } = useAuth();
-  
+
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ const RegisterScreen: React.FC = () => {
     // Get code from URL path
     const pathParts = location.pathname.split('/');
     const code = pathParts[pathParts.length - 1];
-    
+
     if (code && code !== 'register') {
       setReferralCode(code);
     }
@@ -36,13 +36,16 @@ const RegisterScreen: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await authApi.register({
-        full_name: name,
-        phone: phoneNumber,
-        password: password,
-        withdrawal_password: withdrawalPassword,
-        referred_by: referralCode || undefined,
-      });
+      const response = await authApi.register(
+        {
+          full_name: name,
+          phone: phoneNumber,
+          password: password,
+          withdrawal_password: withdrawalPassword,
+        },
+        referralCode // pass referralCode separately
+      );
+
 
       setShowRegistrationSuccess(true);
       setTimeout(() => {
@@ -180,7 +183,7 @@ const RegisterScreen: React.FC = () => {
 
           {/* Login Link */}
           <div className="text-center">
-            <button 
+            <button
               onClick={() => navigate('/login')}
               className="text-gray-600 hover:text-gray-800 transition-colors"
             >
