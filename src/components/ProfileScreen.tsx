@@ -11,7 +11,7 @@ const ProfileScreen: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const menuItems = [
     { icon: Info, label: 'About Company', arrow: true },
-    { icon: CreditCard, label: 'Recharge Records', arrow: true, onClick: () => navigate('/recharge-records') },
+    { icon: CreditCard, label: 'Recharge Records', arrow: true, onClick: () => navigate('/recharge-record') },
     { icon: TrendingUp, label: 'Income Record', arrow: true, onClick: () => navigate('/income-record') },
     { icon: TrendingDown, label: 'Withdraw Record', arrow: true, onClick: () => navigate('/withdrawal-record') },
     { icon: Download, label: 'App Download', arrow: true },
