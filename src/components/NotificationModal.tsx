@@ -31,12 +31,12 @@ const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose }
         <div className="space-y-3 text-sm text-gray-700 mb-6">
           <p>
             <span className="font-semibold">1.Platform launch time:</span>{' '}
-            <span className="text-green-600 font-semibold">October 8 - 2025</span>
+            <span className="text-green-600 font-semibold">October 23 - 2025</span>
           </p>
           
           <p>
             <span className="font-semibold">2.Daily Gift Code:</span>{' '}
-            <span className="text-green-600 font-semibold">₹8 to 300₹ ( Need Plan )</span>
+            <span className="text-green-600 font-semibold">₹8 to 30₹ ( Need Plan )</span>
           </p>
           <p>
             <span className="font-semibold">3.Level 3 agent commission cashback:</span>
