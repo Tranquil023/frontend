@@ -47,33 +47,38 @@ const WithdrawScreen: React.FC = () => {
 
   // Open After 5pm
 
-  const handleWithdraw = async () => {
-
-    toast.error('Withdrawals Starts From 5 Pm Onwards');
-    return;
-  }
   // const handleWithdraw = async () => {
-  //   if (!amount || parseFloat(amount) <= 0) {
-  //     toast.error('Enter a valid amount');
-  //     return;
-  //   }
 
-  //   try {
-  //     const userDetails = await api.get('/users/me');
-  //     console.log(userDetails.data.totalInvested);
-  //     if (userDetails.data.totalInvested <= 0) {
-  //       toast.error('You need to have an investment before withdrawing');
-  //       return;
-  //     }
+  //   toast.error('Withdrawals Starts From 5 Pm Onwards');
+  //   return;
+  // }
 
-  //     const res = await api.post('/users/withdraw', { amount });
-  //     toast.success('Withdrawal requested successfully!');
-  //     setAmount('');
-  //   } catch (err) {
-  //     console.error(err);
-  //     toast.error(err.response?.data?.message || 'Failed to request withdrawal');
-  //   }
-  // };
+  const handleWithdraw = async () => {
+    if (!amount || parseFloat(amount) < 170) {
+      toast.error('Enter a valid amount');
+      return;
+    }
+
+    try {
+      const userDetails = await api.get('/users/me');
+      console.log(userDetails);
+      if (userDetails?.data?.data?.balance >= amount) {
+        toast.error('You do not have sufficient balance to withdraw');
+        return;
+      }
+      if (userDetails?.data?.data?.totalInvested <= 0) {
+        toast.error('You need to have a Recharge before withdrawing');
+        return;
+      }
+
+      const res = await api.post('/users/withdraw', { amount });
+      toast.success('Withdrawal requested successfully!');
+      setAmount('');
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || 'Failed to request withdrawal');
+    }
+  };
 
   if (loading) return <div className="p-4 text-center text-white">Loading...</div>;
 

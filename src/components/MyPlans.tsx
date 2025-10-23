@@ -26,11 +26,12 @@ export default function MyPlan() {
       setLoading(true);
       setError(null);
       
-      const data = await api.get('/users/myPlans');
+      const {data} = await api.get('/users/myPlans');
+      console.log('Fetched Plans:', data);
       
       // Handle different response formats
-      if (Array.isArray(data)) {
-        setPlans(data);
+      if (Array.isArray(data?.data)) {
+        setPlans(data.data);
       } else if (data && Array.isArray(data.plans)) {
         setPlans(data.plans);
       } else if (data && Array.isArray(data.data)) {
@@ -112,7 +113,7 @@ export default function MyPlan() {
                         <span className="text-sm font-medium text-gray-600">Amount</span>
                       </div>
                       <span className="text-lg font-bold text-gray-800">
-                        ${plan.amount.toFixed(2)}
+                        ₹{plan.amount.toFixed(2)}
                       </span>
                     </div>
 
@@ -122,7 +123,7 @@ export default function MyPlan() {
                         <span className="text-sm font-medium text-gray-600">Daily Income</span>
                       </div>
                       <span className="text-lg font-bold text-gray-800">
-                        ${plan.daily_income.toFixed(2)}
+                        ₹{plan.daily_income.toFixed(2)}
                       </span>
                     </div>
 
@@ -132,7 +133,7 @@ export default function MyPlan() {
                         <span className="text-sm font-medium text-gray-600">Total Income</span>
                       </div>
                       <span className="text-lg font-bold text-gray-800">
-                        ${plan.total_income.toFixed(2)}
+                        ₹{plan.total_income.toFixed(2)}
                       </span>
                     </div>
 
