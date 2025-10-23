@@ -61,8 +61,8 @@ const WithdrawScreen: React.FC = () => {
 
     try {
       const userDetails = await api.get('/users/me');
-      console.log(userDetails);
-      if (userDetails?.data?.data?.balance >= amount) {
+      console.log(userDetails?.data?.data?.balance >= amount);
+      if (!(userDetails?.data?.data?.balance >= amount)) {
         toast.error('You do not have sufficient balance to withdraw');
         return;
       }
