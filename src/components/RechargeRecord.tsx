@@ -62,14 +62,14 @@ const RechargeRecordScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-green-600">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 text-black" />
         </button>
         <h1 className="text-2xl font-bold text-white">Recharge Records</h1>
         <div className="w-10"></div>

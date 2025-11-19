@@ -49,7 +49,7 @@ const ProfileScreen: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-green-600  pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8 mb-6">
         <h1 className="text-2xl font-bold text-white">Profile</h1>
@@ -71,29 +71,29 @@ const ProfileScreen: React.FC = () => {
         </div>
 
         {/* Account Balance */}
-        <div className="bg-white rounded-3xl p-6 shadow-xl mb-6">
+        <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-gray-600 text-lg">Account Balance</span>
             <button
               onClick={() => navigate('/recharge')}
-              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center space-x-2"
+              className="bg-gradient-to-r from-green-500 to-blue-600  text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center space-x-2"
             >
-              Recharge ⚡
+              Recharge
             </button>
           </div>
           <div className="text-4xl font-bold text-gray-800">₹{userData?.balance}</div>
         </div>
 
         {/* Stats */}
-        <div className="bg-gradient-to-r from-yellow-600 to-orange-600 rounded-3xl p-6 shadow-xl mb-6">
-          <div className="grid grid-cols-3 gap-4 text-white text-center">
+        <div className="bg-yellow-600 rounded-3xl p-6 shadow-xl mb-6">
+          <div className="grid grid-cols-3 gap-4 text-black text-center">
             <div>
               <div className="text-2xl font-bold">₹{userData?.totalInvested}</div>
-              <div className="text-sm opacity-90">Recharge</div>
+              <div className="text-sm opacity-90">Recharge balance</div>
             </div>
             <div>
               <div className="text-2xl font-bold">₹{userData?.totalWithdrawal}</div>
-              <div className="text-sm opacity-90">Withdraw</div>
+              <div className="text-sm opacity-90">Withdraw Balance</div>
             </div>
             <div>
               <div className="text-2xl font-bold">₹{userData?.totalEarnings}</div>

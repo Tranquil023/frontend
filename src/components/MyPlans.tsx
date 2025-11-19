@@ -76,7 +76,7 @@ export default function MyPlan() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-green-500 p-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">My Plans</h1>
@@ -84,7 +84,7 @@ export default function MyPlan() {
         </div>
 
         {plans.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-lg p-12 text-center">
+          <div className="bg-yellow-500 rounded-lg shadow-lg p-12 text-center">
             <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">No plans found</h3>
             <p className="text-gray-500">You haven't purchased any plans yet</p>
@@ -94,7 +94,7 @@ export default function MyPlan() {
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-yellow-500 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="bg-gradient-to-r from-indigo-500 to-purple-600 h-2"></div>
                 

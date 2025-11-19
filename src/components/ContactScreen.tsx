@@ -27,16 +27,16 @@ const ContactScreen: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-green-500">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
         >
-          <ArrowLeft className="w-6 h-6 text-white" />
+          <ArrowLeft className="w-6 h-6 text-black" />
         </button>
-        <h1 className="text-2xl font-bold text-white">Join Our Communities</h1>
+        <h1 className="text-2xl font-bold text-black">Join Our Communities</h1>
         <div className="w-10"></div>
       </div>
 
@@ -44,10 +44,10 @@ const ContactScreen: React.FC = () => {
         {communities.map((community) => {
           const Icon = community.icon;
           return (
-            <div key={community.id} className="bg-white rounded-3xl p-6 shadow-xl">
+            <div key={community.id} className="bg-yellow rounded-3xl p-6 shadow-xl">
               <div className="text-center space-y-4">
-                <div className={`w-16 h-16 bg-gradient-to-br ${community.color} rounded-full flex items-center justify-center mx-auto`}>
-                  <Icon className="w-8 h-8 text-white" />
+                <div className={`w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto`}>
+                  <Icon className="w-8 h-8 text-black" />
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-800">{community.name}</h3>
@@ -56,7 +56,7 @@ const ContactScreen: React.FC = () => {
                   {community.description}
                 </p>
                 
-                <button className={`w-full bg-gradient-to-r ${community.color} hover:opacity-90 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-[1.02]`} onClick={() => {
+                <button className={`w-full bg-green-800 hover:opacity-90 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-[1.02]`} onClick={() => {
                   window.open(community.link, '_blank');
                 }}>
                   {community.buttonText}

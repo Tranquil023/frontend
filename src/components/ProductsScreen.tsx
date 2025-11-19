@@ -86,8 +86,8 @@ const ProductsScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24">
-      <div className="bg-[#956630] rounded-b-[40px] p-6 pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-green-500 to-blue-400 pb-24">
+      <div className="bg-green-600 text-white rounded-b-[40px] p-6 pb-12">
         <h1 className="text-3xl font-bold text-white text-center mb-4">Products List</h1>
       </div>
 
@@ -97,7 +97,7 @@ const ProductsScreen: React.FC = () => {
           <button
             onClick={() => setActiveTab('daily')}
             className={`flex-1 py-2 px-4 ${
-              activeTab === 'daily' ? 'bg-[#956630] text-white' : 'text-gray-500'
+              activeTab === 'daily' ? 'bg-blue-600 text-white' : 'text-gray-500'
             } rounded-xl font-semibold`}
           >
             Daily Plan
@@ -105,7 +105,7 @@ const ProductsScreen: React.FC = () => {
           <button
             onClick={() => setActiveTab('special')}
             className={`flex-1 py-2 px-4 ${
-              activeTab === 'special' ? 'bg-[#956630] text-white' : 'text-gray-500'
+              activeTab === 'special' ? 'bg-blue-600 text-white' : 'text-gray-500'
             } font-semibold`}
           >
             Special Plan
@@ -125,14 +125,14 @@ const ProductsScreen: React.FC = () => {
         ) : (
           <div className="space-y-6">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-3xl p-6 shadow-lg">
+              <div key={product.id} className="bg-yellow-400 rounded-3xl p-6 shadow-lg">
                 {/* Header */}
                 <div className="mb-6 flex justify-between items-start">
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[#956630] mb-2">{product.name}</h3>
+                    <h3 className="text-xl font-bold text-green-700 mb-2">{product.name}</h3>
                     <div className="text-gray-600">
                       <div className="mb-1">Product Price:</div>
-                      <div className="text-2xl font-bold text-[#956630]">Rs {product.price}</div>
+                      <div className="text-2xl font-bold text-green-700">Rs {product.price}</div>
                     </div>
                   </div>
                   {/* <img src={product.image} alt={product.name} className="w-24 h-24 object-contain" /> */}
@@ -157,7 +157,7 @@ const ProductsScreen: React.FC = () => {
                 {/* Invest */}
                 <button
                   onClick={() => handleInvest(product)}
-                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg flex items-center justify-center space-x-2 transition-colors duration-200"
+                  className="w-full bg-green-800 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg flex items-center justify-center space-x-2 transition-colors duration-200"
                 >
                   <TrendingUp className="w-5 h-5" />
                   <span>Invest Now</span>

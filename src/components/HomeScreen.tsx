@@ -1,145 +1,158 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Globe, Bell, Settings, MessageCircle, CreditCard, ArrowDownToLine, TrendingUp } from 'lucide-react';
-import Logo from './Logo';
-import NotificationModal from './NotificationModal';
+import Logo from './Logo'; // Assuming Logo component is defined elsewhere
+import NotificationModal from './NotificationModal'; // Assuming NotificationModal component is defined elsewhere
 
 const HomeScreen: React.FC = () => {
-  const navigate = useNavigate();
-  const [showNotification, setShowNotification] = useState(false);
+    const navigate = useNavigate();
+    const [showNotification, setShowNotification] = useState(false);
+    
+    // --- AUTHENTICATION TOKEN CHECK UPDATED HERE ---
+    
+    useEffect(() => {
+        const checkAuthToken = () => {
+            // Check for the presence of an 'authToken' in localStorage
+            const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    // Check if this is first visit or reload
-    if (!sessionStorage.getItem('notificationShown')) {
-      setShowNotification(true);
-      sessionStorage.setItem('notificationShown', 'true');
-    }
-  }, []);
+            if (!token) {
+                // If the token is NOT available (null or undefined), redirect to the login page
+                // Assuming your login route is '/login'
+                navigate('/login');
+            }
+        };
 
-  const actionButtons = [
-    { icon: Settings, label: 'CheckIn', color: 'from-blue-500 to-blue-600', onClick: () => navigate('/') },
-    { icon: MessageCircle, label: 'contact', color: 'from-purple-500 to-purple-600', onClick: () => navigate('/contact') },
-    { icon: CreditCard, label: 'Recharge', color: 'from-green-500 to-green-600', onClick: () => navigate('/recharge') },
-    { icon: ArrowDownToLine, label: 'withdraw', color: 'from-orange-500 to-orange-600', onClick: () => navigate('/withdraw') },
-  ];
+        checkAuthToken();
 
-  const specialPlan = {
-    name: 'Limited Offer',
-    price: '₹5000',
-    dailyProfit: '₹4000',
-    totalIncome: '₹8000',
-    duration: '2 Days'
-  };
+        // Existing Notification logic
+        if (!sessionStorage.getItem('notificationShown')) {
+            setShowNotification(true);
+            // sessionStorage.setItem('notificationShown', 'true');
+        }
+    }, [navigate]); // navigate is a dependency of useEffect
+    // ------------------------------------
 
+    const actionButtons = [
+        { icon: Settings, label: 'CheckIn', color: 'bg-black', onClick: () => navigate('/') },
+        { icon: MessageCircle, label: 'contact', color: 'bg-black', onClick: () => navigate('/contact') },
+        { icon: CreditCard, label: 'Recharge', color: 'bg-black', onClick: () => navigate('/recharge') },
+        { icon: ArrowDownToLine, label: 'withdraw', color: 'bg-black', onClick: () => navigate('/withdraw') },
+    ];
 
-  return (
-    <>
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600 pb-20">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 pt-8">
-        <Logo className="w-12 h-12" />
-        <div className="flex items-center space-x-4">
-          <Globe className="w-6 h-6 text-white" />
-          <button onClick={() => setShowNotification(true)}>
-            <Bell className="w-6 h-6 text-white" />
-          </button>
-        </div>
-      </div>
+    const specialPlan = { name: 'Limited Offer', price: '₹775', dailyProfit: '₹2999', totalIncome: '₹14995', duration: '2 Days' };
 
-      {/* Main Content */}
-      <div className="px-4 space-y-6">
-        {/* Hero Image */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl overflow-hidden">
-          <img 
-            src="https://images.pexels.com/photos/273230/pexels-photo-273230.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Company Building"
-            className="w-full h-48 object-cover"
-          />
-        </div>
+    return (
+        <>
+            <div className="max-h-screen bg-green-600 pb-20"> 
+                {/* Header */}
+                <div className="flex items-center justify-between p-4 pt-8">
+                    <Logo className="w-8 h-8 text-white bg-blue-700 rounded-full p-1" /> 
+                    <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                            <Globe className="w-5 h-5 text-gray-700" />
+                        </div>
+                        <button onClick={() => setShowNotification(true)} className="w-8 h-8 bg-yellow-300 rounded-full flex items-center justify-center shadow-md">
+                            <Bell className="w-5 h-5 text-gray-700" />
+                        </button>
+                    </div>
+                </div>
 
-        {/* Action Buttons */}
-        <div className="grid grid-cols-4 gap-4">
-          {actionButtons.map((button, index) => {
-            const Icon = button.icon;
-            return (
-              <div key={index} className="text-center">
-                <button 
-                  onClick={button.onClick}
-                  className={`w-16 h-16 bg-gradient-to-br ${button.color} rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer`}
-                >
-                  <Icon className="w-8 h-8 text-white" />
-                </button>
-                <span className="text-white text-sm font-medium">{button.label}</span>
-              </div>
-            );
-          })}
-        </div>
+                {/* Main Content */}
+                <div className="px-6 space-y-6 mt-6">
 
-        {/* Special Plan */}
-        <div className="bg-white rounded-3xl p-6 shadow-xl">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="w-6 h-6 text-yellow-600" />
-              <h2 className="text-xl font-bold text-gray-800">Special Plan</h2>
-            </div>
-            <div className="bg-gray-900 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Days:2
-            </div>
-          </div>
+                    {/* Action Buttons Container */}
+                    <div className="grid grid-cols-4 gap-4">
+                        {actionButtons.map((button, index) => {
+                            const Icon = button.icon;
+                            return (
+                                <div key={index} className="text-center">
+                                    <button 
+                                        onClick={button.onClick}
+                                        className={`w-14 h-14 ${button.color} rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer`}
+                                    >
+                                        <Icon className="w-7 h-7 text-white" />
+                                    </button>
+                                    <span className="text-gray-800 text-sm font-medium">{button.label}</span> 
+                                </div>
+                            );
+                        })}
+                    </div>
 
-          <div className="flex items-center space-x-4 mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                <div className="w-8 h-8 bg-yellow-400 rounded-full"></div>
-              </div>
+                    {/* Special Plan Card */}
+                    <div className="bg-yellow-500 rounded-xl p-4 shadow-2xl mt-8"> 
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-2">
+                                {/* <TrendingUp className="w-5 h-5 text-white" /> */}
+                                <h2 className="text-md font-bold text-gray-800">Special Plan</h2>
+                            </div>
+                            <div className="bg-gray-700 text-white px-3 py-0.5 rounded-full text-xs font-medium"> Days:2 </div>
+                        </div>
+
+                        <div className="flex items-center space-x-4">
+                            <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-lg">
+                                <div className="text-red-700 text-3xl font-bold">₹</div> 
+                            </div>
+
+                            <div className="flex-1 grid grid-cols-3 gap-2 items-center">
+                                <div className="text-center">
+                                    <div className="text-xl font-bold text-gray-800">{specialPlan.dailyProfit}</div>
+                                    <div className="text-gray-500 text-xs">Daily Profit</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-xl font-bold text-gray-800">{specialPlan.totalIncome}</div>
+                                    <div className="text-gray-500 text-xs">Total Income</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-xl font-bold text-gray-800">{specialPlan.totalIncome}</div>
+                                    <div className="text-gray-500 text-xs">Total Income</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-4 mt-4 border-t border-gray-100">
+                            <div className="text-lg font-bold text-gray-800">Price: {specialPlan.price}</div>
+                            <button 
+                                onClick={() => navigate('/invest', { state: { plan: specialPlan } })}
+                                className="bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-full transition-colors duration-200 shadow-md text-sm"
+                            >
+                                Invest
+                            </button>
+                        </div>
+                    </div> 
+
+                    {/* Notification/Withdrawal Success Section */}
+                    <div className="bg-yellow-500 rounded-xl p-3 flex items-center space-x-3 shadow-md">
+                        <Logo className="w-8 h-8 text-white bg-blue-700 rounded-full p-1 flex-shrink-0" />
+                        <div className="flex-1">
+                            <span className="font-semibold text-black text-sm">User 9586 ****50</span>
+                            <span className="text-xs text-black"> just received</span>
+                            <p className="text-blacks text-sm">Withdraw 7423 successfully</p>
+                        </div>
+                    </div> 
+                    <div className="bg-yellow-500 rounded-xl p-3 flex items-center space-x-3 shadow-md">
+                        <Logo className="w-8 h-8 text-white bg-blue-700 rounded-full p-1 flex-shrink-0" />
+                        <div className="flex-1">
+                            <span className="font-semibold text-black text-sm">User 6976 ****50</span>
+                            <span className="text-xs text-black"> just received</span>
+                            <p className="text-blacks text-sm">Withdraw 803 successfully</p>
+                        </div>
+                    </div> 
+                    <div className="bg-yellow-500 rounded-xl p-3 flex items-center space-x-3 shadow-md">
+                        <Logo className="w-8 h-8 text-white bg-blue-700 rounded-full p-1 flex-shrink-0" />
+                        <div className="flex-1">
+                            <span className="font-semibold text-black text-sm">User 8658 ****50</span>
+                            <span className="text-xs text-black"> just received</span>
+                            <p className="text-blacks text-sm">Withdraw 5693 successfully</p>
+                        </div>
+                    </div> 
+                    
+
+                </div>
             </div>
             
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Limited Offer</h3>
-              <div className="flex justify-between items-center mb-2">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800">₹ 2999</div>
-                  <div className="text-gray-500 text-sm">Daily Profit</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800">₹ 14995</div>
-                  <div className="text-gray-500 text-sm">Total Income</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-gray-800">Price: ₹775</div>
-            <button 
-              onClick={() => navigate('/invest', { state: { plan: specialPlan } })}
-              className="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition-colors duration-200 shadow-lg"
-            >
-              Invest
-            </button>
-          </div>
-        </div>
-
-        {/* Notification */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 flex items-center space-x-3">
-          <Logo className="w-10 h-10" />
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-1">
-              <span className="font-semibold text-gray-800">User 2137 ****50</span>
-              <span className="text-xs text-gray-500">just received</span>
-            </div>
-            <p className="text-gray-600 text-sm">Withdraw 74423 successfully</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <NotificationModal 
-      isOpen={showNotification} 
-      onClose={() => setShowNotification(false)} 
-    />
-    </>
-  );
+            <NotificationModal isOpen={showNotification} onClose={() => setShowNotification(false)} />
+        </>
+    );
 };
 
 export default HomeScreen;

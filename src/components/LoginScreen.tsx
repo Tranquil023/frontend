@@ -51,15 +51,15 @@ const LoginScreen: React.FC = () => {
 };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 via-white to-gray-50 flex flex-col">
+    <div className="min-h-screen bg-green-500 flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-sm space-y-8">
           {/* Logo Section */}
           <div className="text-center space-y-6">
             <Logo className="w-32 h-32 mx-auto" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-1">
-                MoneyInvest
+              <h1 className="text-4xl font-bold text-gray-900 mb-1">
+                Stack
               </h1>
             </div>
           </div>
@@ -68,12 +68,12 @@ const LoginScreen: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Phone Number Input */}
             <div className="relative">
-              <div className="flex items-center bg-white rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 transition-colors">
+              <div className="flex items-center bg-yellow-300 rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 transition-colors">
                 <div className="flex items-center px-4 py-4 space-x-2">
-                  <div className="w-6 h-4 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-sm border border-gray-300"></div>
-                  <span className="text-gray-700 font-medium">+91</span>
+                  <div className="w-6 h-4 bg-green-700 rounded-sm border border-gray-300"></div>
+                  <span className="text-black font-medium">+91</span>
                 </div>
-                <div className="w-px h-8 bg-gray-200"></div>
+                <div className="w-px h-8 bg-black"></div>
                 <div className="flex-1 relative">
                   <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
@@ -115,12 +115,12 @@ const LoginScreen: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-yellow-700 to-orange-500 hover:from-yellow-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="text-lg">
                 {isLoading ? 'LOGGING IN...' : 'LOG IN'}
               </span>
-              <Send size={20} />
+              {/* <Send size={20} /> */}
             </button>
           </form>
 
@@ -128,10 +128,10 @@ const LoginScreen: React.FC = () => {
           <div className="text-center">
             <button 
               onClick={() => navigate('/register')}
-              className="text-gray-600 hover:text-gray-800 transition-colors"
+              className="text-gray-800 hover:text-gray-800 transition-colors"
             >
               <span className="font-medium">Don't have an account?</span>
-              <span className="text-blue-600 hover:underline"> Register</span>
+              <span className="text-black hover:underline"> Register</span>
             </button>
           </div>
         </div>

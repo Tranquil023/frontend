@@ -11,11 +11,11 @@ const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose }
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl p-6 max-w-sm w-full mx-4 relative">
+    <div className="fixed inset-0 bg-white-300/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-yellow-300 rounded-3xl p-6 max-w-lg mx-4 relative">
         <button
           onClick={onClose}
-          className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center"
+          className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-yellows rounded-full shadow-lg flex items-center justify-center"
         >
           <X className="w-6 h-6 text-gray-600" />
         </button>

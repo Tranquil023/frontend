@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import BottomNavigation from './components/BottomNavigation';
 import { Toaster } from 'react-hot-toast';
+import { LoadingProvider } from './contexts/LoadingContext';
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -24,13 +25,15 @@ function AppContent() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      <div className="flex-1">
-        <Outlet />
+    <LoadingProvider>
+      <div className="flex flex-col min-h-screen bg-gray-100">
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        {isAuthenticated && <BottomNavigation />}
+        <Toaster position="top-center" />
       </div>
-      {isAuthenticated && <BottomNavigation />}
-      <Toaster position="top-center" />
-    </div>
+    </LoadingProvider>
   );
 }
 

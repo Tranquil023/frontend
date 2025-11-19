@@ -74,7 +74,7 @@ const IncomeRecordScreen: React.FC = () => {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-green-600 to-blue-500">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button

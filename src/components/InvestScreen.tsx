@@ -72,13 +72,13 @@ const InvestScreen: React.FC = () => {
 
   if (invested) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-400 via-green-500 to-green-600 flex items-center justify-center">
+      <div className="min-h-screen bg-green-400 flex items-center justify-center">
         <div className="bg-white rounded-3xl p-8 mx-4 text-center shadow-xl max-w-sm w-full">
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Investment Successful!</h2>
-          <p className="text-gray-600 mb-4">Your investment plan is now active</p>
+          <p className="text-black mb-4">Your investment plan is now active</p>
           <div className="bg-green-50 rounded-2xl p-4 mb-4">
             <p className="text-green-700 font-semibold">{currentPlan.name}</p>
             <p className="text-green-600">Investment: {formatCurrency(currentPlan.price)}</p>
@@ -95,7 +95,7 @@ const InvestScreen: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-400 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-green-400 to-blue-600 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
@@ -104,90 +104,76 @@ const InvestScreen: React.FC = () => {
         >
           <ArrowLeft className="w-6 h-6 text-white" />
         </button>
-        <h1 className="text-2xl font-bold text-white">Invest Now</h1>
+        <h1 className="text-2xl font-bold text-black">Invest Now</h1>
         <div className="w-10"></div>
       </div>
 
       <div className="px-4 space-y-6 pb-6">
         {/* Plan Details */}
-        <div className="bg-white rounded-3xl p-6 shadow-xl">
+        <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
           <div className="flex items-center space-x-3 mb-4">
-            <TrendingUp className="w-8 h-8 text-green-600" />
+            <TrendingUp className="w-8 h-8 text-black" />
             <h2 className="text-xl font-bold text-gray-800">{currentPlan.name}</h2>
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="text-center p-4 bg-green-50 rounded-2xl">
-              <div className="text-2xl font-bold text-green-600">{formatCurrency(currentPlan.dailyIncome)}</div>
-              <div className="text-sm text-green-500">Daily Profit</div>
+            <div className="text-center p-4 bg-yellow-400 rounded-2xl">
+              <div className="text-2xl font-bold text-black">{formatCurrency(currentPlan.dailyIncome)}</div>
+              <div className="text-sm text-black-500">Daily Profit</div>
             </div>
-            <div className="text-center p-4 bg-blue-50 rounded-2xl">
-              <div className="text-2xl font-bold text-blue-600">{formatCurrency(currentPlan.totalIncome)}</div>
-              <div className="text-sm text-blue-500">Total Income</div>
+            <div className="text-center p-4 bg-yellow-400 rounded-2xl">
+              <div className="text-2xl font-bold text-black">{formatCurrency(currentPlan.totalIncome)}</div>
+              <div className="text-sm text-black">Total Income</div>
             </div>
           </div>
 
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
               <Clock className="w-5 h-5 text-gray-500" />
-              <span className="text-gray-600">Duration: {currentPlan.duration}</span>
+              <span className="text-black">Duration: {currentPlan.duration}</span>
             </div>
             <div className="text-2xl font-bold text-gray-800">{formatCurrency(currentPlan.price)}</div>
           </div>
         </div>
 
         {/* Investment Summary */}
-        <div className="bg-white rounded-3xl p-6 shadow-xl">
+        <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Investment Summary</h3>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Investment Amount</span>
+              <span className="text-black">Investment Amount</span>
               <span className="font-semibold">{formatCurrency(currentPlan.price)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Expected Daily Return</span>
+              <span className="text-black">Expected Daily Return</span>
               <span className="font-semibold text-green-600">{formatCurrency(currentPlan.dailyIncome)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Total Expected Return</span>
+              <span className="text-black">Total Expected Return</span>
               <span className="font-semibold text-blue-600">{formatCurrency(currentPlan.totalIncome)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Plan Duration</span>
+              <span className="text-black">Plan Duration</span>
               <span className="font-semibold">{currentPlan.duration}</span>
             </div>
             <hr className="my-3" />
             <div className="flex justify-between text-lg font-bold">
               <span>Net Profit</span>
-              <span className="text-green-600">
+              <span className="text-black">
                 {formatCurrency(currentPlan.totalIncome - currentPlan.price)}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Risk Warning */}
-        <div className="bg-orange-50 border-l-4 border-orange-400 rounded-3xl p-6">
-          <div className="flex items-start space-x-3">
-            <AlertCircle className="w-6 h-6 text-orange-500 mt-1" />
-            <div>
-              <h3 className="font-bold text-orange-800 mb-2">Investment Notice</h3>
-              <div className="text-sm text-orange-700 space-y-1">
-                <p>• Investment returns are subject to market conditions</p>
-                <p>• Please invest only what you can afford</p>
-                <p>• Daily profits will be credited automatically</p>
-                <p>• Plan cannot be cancelled once activated</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Invest Button */}
         <div className="px-4">
           <button
             onClick={handleInvest}
             disabled={loading}
-            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-bold py-4 rounded-3xl transition-colors duration-200 shadow-lg flex items-center justify-center space-x-2"
+            className="w-full bg-green-800 text-white font-bold py-4 rounded-3xl transition-colors duration-200 shadow-lg flex items-center justify-center space-x-2"
           >
           {loading ? (
             <>

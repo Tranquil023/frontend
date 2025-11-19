@@ -48,7 +48,7 @@ const RechargeScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-600 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-green-500 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
@@ -63,7 +63,7 @@ const RechargeScreen: React.FC = () => {
 
       <div className="px-4 space-y-6">
         {/* Current Balance */}
-        <div className="bg-white rounded-3xl p-6 shadow-xl relative">
+        <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl relative">
           {loading ? (
             <div className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-3xl">
               <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
@@ -73,7 +73,7 @@ const RechargeScreen: React.FC = () => {
           ) : (
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
                   <Wallet className="w-8 h-8 text-white" />
                 </div>
                 <div>
@@ -83,7 +83,7 @@ const RechargeScreen: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-4 rounded-xl">
+                <div className="bg-yellow-300 p-4 rounded-xl">
                   <div className="flex items-center space-x-2">
                     <Coins className="w-5 h-5 text-blue-500" />
                     <span className="text-gray-600 text-sm">Total Invested</span>
@@ -91,7 +91,7 @@ const RechargeScreen: React.FC = () => {
                   <div className="text-xl font-semibold mt-1">₹{userData?.totalInvested}</div>
                 </div>
 
-                <div className="bg-gray-50 p-4 rounded-xl">
+                <div className="bg-yellow-300 p-4 rounded-xl">
                   <div className="flex items-center space-x-2">
                     <TrendingUp className="w-5 h-5 text-green-500" />
                     <span className="text-gray-600 text-sm">Total Earnings</span>

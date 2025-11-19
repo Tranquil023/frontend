@@ -64,7 +64,7 @@ const RegisterScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 via-white to-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b bg-blue-500 flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-sm space-y-8">
           {/* Logo Section */}
@@ -172,7 +172,7 @@ const RegisterScreen: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-yellow-700 to-orange-500 hover:from-yellow-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="text-lg">
                 {isLoading ? 'REGISTERING...' : 'REGISTER'}

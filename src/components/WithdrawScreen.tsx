@@ -83,13 +83,13 @@ const WithdrawScreen: React.FC = () => {
   if (loading) return <div className="p-4 text-center text-white">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-green-500 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button onClick={handleBack} className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
           <ArrowLeft className="w-6 h-6 text-white" />
         </button>
-        <h1 className="text-2xl font-bold text-white">Withdraw</h1>
+        <h1 className="text-2xl font-bold text-black">Withdraw</h1>
         <div className="w-10"></div>
       </div>
 
@@ -97,19 +97,19 @@ const WithdrawScreen: React.FC = () => {
         {bankAccount !== null ? (
           <>
             {/* Bank Details */}
-            <div className="bg-white/20 backdrop-blur-sm rounded-3xl p-6 text-center">
+            <div className="bg-yellow-400 backdrop-blur-sm rounded-3xl p-6 text-center">
               <div className="flex justify-between mb-2">
-                <span className="text-white text-lg">Bank Account</span>
-                <FileText className="w-6 h-6 text-white" />
+                <span className="text-black text-lg">Bank Account</span>
+                <FileText className="w-6 h-6 text-black" />
               </div>
-              <div className="text-white font-bold">
+              <div className="text-black font-bold">
                 {bankAccount.account_name} - {bankAccount.account_number} ({bankAccount.bank_name})
               </div>
             </div>
 
             {/* Withdraw Form */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl space-y-4">
-              <h3 className="text-purple-600 font-semibold">Enter Amount</h3>
+            <div className="bg-yellow-400 rounded-3xl p-6 shadow-xl space-y-4">
+              <h3 className="text-black font-semibold">Enter Amount</h3>
               <input
                 type="number"
                 value={amount}
@@ -119,7 +119,7 @@ const WithdrawScreen: React.FC = () => {
               />
               <button
                 onClick={handleWithdraw}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
+                className="w-full bg-green-800 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
               >
                 Withdraw
               </button>
@@ -139,7 +139,7 @@ const WithdrawScreen: React.FC = () => {
 
         {/* Instructions */}
         <div className="bg-white rounded-3xl p-6 shadow-xl">
-          <div className="border-l-4 border-purple-500 pl-4">
+          <div className="border-l-4 border-green-500 pl-4">
             <h3 className="font-bold text-gray-800 mb-3">Instructions</h3>
             <div className="space-y-2 text-sm text-gray-600">
               <p>1. The daily withdrawal time is from 07:00:00 to 18:00:00</p>

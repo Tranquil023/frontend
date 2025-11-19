@@ -85,7 +85,7 @@ const WithdrawalRecordScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600">
+    <div className="min-h-screen bg-green-600">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
@@ -110,9 +110,9 @@ const WithdrawalRecordScreen: React.FC = () => {
         ) : (
           <>
             {/* Total Withdrawn */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl">
+            <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
               <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
                   <ArrowDownToLine className="w-8 h-8 text-white" />
                 </div>
                 <div>
@@ -125,10 +125,10 @@ const WithdrawalRecordScreen: React.FC = () => {
             {/* Withdrawal Records */}
             <div className="space-y-4">
               {withdrawalRecords.map((record) => (
-                <div key={record.id} className="bg-white rounded-3xl p-6 shadow-xl">
+                <div key={record.id} className="bg-yellow-300 rounded-3xl p-6 shadow-xl">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
                         <ArrowDownToLine className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -137,8 +137,8 @@ const WithdrawalRecordScreen: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bold text-blue-600">{record.amount}</div>
-                      <div className={`text-xs px-2 py-1 rounded-full ${getStatusColor(record.status)}`}>
+                      <div className="text-xl font-bold text-black">{record.amount}</div>
+                      <div className={`text-xs px-2 py-1 rounded-full bg-${getStatusColor(record.status)}`}>
                         {record.status}
                       </div>
                     </div>
@@ -155,9 +155,9 @@ const WithdrawalRecordScreen: React.FC = () => {
                         <span>{record.time}</span>
                       </div>
                     </div>
-                    <div className="text-xs text-gray-400">
+                    {/* <div className="text-xs text-gray-400">
                       Transaction ID: {record.transaction_id}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -167,7 +167,7 @@ const WithdrawalRecordScreen: React.FC = () => {
           </>
         )}
 
-        {/* Summary Stats */}
+        {/* Summary Stats
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 text-white">
           <h3 className="font-bold mb-4">Withdrawal Summary</h3>
           <div className="grid grid-cols-2 gap-4 text-center">
@@ -180,7 +180,7 @@ const WithdrawalRecordScreen: React.FC = () => {
               <div className="text-sm opacity-90">Total Requests</div>
             </div>
           </div>
-        </div>
+        </div> */}
         
       </div>
     </div>

@@ -56,7 +56,7 @@ const BankDetailsScreen: React.FC = () => {
   if (saved) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-400 via-green-500 to-green-600 flex items-center justify-center">
-        <div className="bg-white rounded-3xl p-8 mx-4 text-center shadow-xl">
+        <div className="bg-yellow-500 rounded-3xl p-8 mx-4 text-center shadow-xl">
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-10 h-10 text-white" />
           </div>
@@ -68,12 +68,12 @@ const BankDetailsScreen: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 pb-20">
+    <div className="min-h-screen bg-green-600 pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 pt-8">
         <button
           onClick={() => navigate(-1)}
-          className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
+          className="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 text-white" />
         </button>
@@ -85,9 +85,9 @@ const BankDetailsScreen: React.FC = () => {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Account Holder Name */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl">
+          <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center space-x-3 mb-4">
-              <User className="w-6 h-6 text-blue-600" />
+              <User className="w-6 h-6 text-black" />
               <h3 className="text-lg font-bold text-gray-800">Account Holder Name</h3>
             </div>
             <input
@@ -101,7 +101,7 @@ const BankDetailsScreen: React.FC = () => {
           </div>
 
           {/* Account Number */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl">
+          <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center space-x-3 mb-4">
               <Hash className="w-6 h-6 text-blue-600" />
               <h3 className="text-lg font-bold text-gray-800">Account Number</h3>
@@ -125,7 +125,7 @@ const BankDetailsScreen: React.FC = () => {
           </div>
 
           {/* IFSC Code */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl">
+          <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center space-x-3 mb-4">
               <CreditCard className="w-6 h-6 text-blue-600" />
               <h3 className="text-lg font-bold text-gray-800">IFSC Code</h3>
@@ -141,7 +141,7 @@ const BankDetailsScreen: React.FC = () => {
           </div>
 
           {/* Bank Details */}
-          <div className="bg-white rounded-3xl p-6 shadow-xl">
+          <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center space-x-3 mb-4">
               <Building className="w-6 h-6 text-blue-600" />
               <h3 className="text-lg font-bold text-gray-800">Bank Information</h3>
@@ -174,7 +174,7 @@ const BankDetailsScreen: React.FC = () => {
         </form>
 
         {/* Security Note */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 text-white">
+        <div className="bg-yellow-500/10 backdrop-blur-sm rounded-3xl p-6 text-white">
           <div className="border-l-4 border-yellow-400 pl-4">
             <h3 className="font-bold mb-3">Security Information</h3>
             <div className="space-y-2 text-sm text-white/90">
