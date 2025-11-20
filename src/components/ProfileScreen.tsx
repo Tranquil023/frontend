@@ -36,6 +36,7 @@ const ProfileScreen: React.FC = () => {
 
     fetchUserData();
   }, []);
+  const Balance_amount=userData?.recharge_balance! + userData?.withdrawal_balance!;
 
   const handleLogout = async () => {
     try {
@@ -81,18 +82,18 @@ const ProfileScreen: React.FC = () => {
               Recharge
             </button>
           </div>
-          <div className="text-4xl font-bold text-gray-800">₹{userData?.balance}</div>
+          <div className="text-4xl font-bold text-gray-800">₹{Balance_amount}</div>
         </div>
 
         {/* Stats */}
         <div className="bg-yellow-600 rounded-3xl p-6 shadow-xl mb-6">
           <div className="grid grid-cols-3 gap-4 text-black text-center">
             <div>
-              <div className="text-2xl font-bold">₹{userData?.totalInvested}</div>
+              <div className="text-2xl font-bold">₹{userData?.recharge_balance}</div>
               <div className="text-sm opacity-90">Recharge balance</div>
             </div>
             <div>
-              <div className="text-2xl font-bold">₹{userData?.totalWithdrawal}</div>
+              <div className="text-2xl font-bold">₹{userData?.withdrawal_balance}</div>
               <div className="text-sm opacity-90">Withdraw Balance</div>
             </div>
             <div>

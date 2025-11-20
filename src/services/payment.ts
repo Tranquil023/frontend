@@ -25,6 +25,8 @@ export interface UserData {
   totalWithdrawal: number;
   totalInvested: number;
   totalEarnings: number;
+  recharge_balance: number;
+  withdrawal_balance: number;
   referral_code: string;
   createdAt: string;
   updatedAt: string;

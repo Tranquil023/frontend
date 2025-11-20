@@ -110,7 +110,7 @@ const WithdrawalRecordScreen: React.FC = () => {
         ) : (
           <>
             {/* Total Withdrawn */}
-            <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
+            {/* <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
               <div className="flex items-center space-x-4">
                 <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
                   <ArrowDownToLine className="w-8 h-8 text-white" />
@@ -120,7 +120,7 @@ const WithdrawalRecordScreen: React.FC = () => {
                   <div className="text-gray-500">Total Withdrawn</div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Withdrawal Records */}
             <div className="space-y-4">

@@ -61,15 +61,15 @@ const WithdrawScreen: React.FC = () => {
 
     try {
       const userDetails = await api.get('/users/me');
-      console.log(userDetails?.data?.data?.balance >= amount);
-      if (!(userDetails?.data?.data?.balance >= amount)) {
+      console.log(userDetails?.data?.data?.withdrawal_balance >= amount);
+      if (!(userDetails?.data?.data?.withdrawal_balance >= amount)) {
         toast.error('You do not have sufficient balance to withdraw');
         return;
       }
-      if (userDetails?.data?.data?.totalInvested <= 0) {
-        toast.error('You need to have a Recharge before withdrawing');
-        return;
-      }
+      // if (userDetails?.data?.data?.totalInvested <= 0) {
+      //   toast.error('You need to have a Recharge before withdrawing');
+      //   return;
+      // }
 
       const res = await api.post('/users/withdraw', { amount });
       toast.success('Withdrawal requested successfully!');
