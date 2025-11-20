@@ -130,7 +130,7 @@ const WithdrawScreen: React.FC = () => {
             <p className="text-red-500 font-medium">You need to add bank details first</p>
             <button
               onClick={handleAddBank}
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
+              className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 rounded-2xl transition-colors duration-200"
             >
               Add Bank Details
             </button>

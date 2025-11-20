@@ -55,11 +55,11 @@ const LoginScreen: React.FC = () => {
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-sm space-y-8">
           {/* Logo Section */}
-          <div className="text-center space-y-6">
+          <div className="text-center">
             <Logo className="w-32 h-32 mx-auto" />
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-1">
-                Stack
+                STACK
               </h1>
             </div>
           </div>
@@ -90,7 +90,7 @@ const LoginScreen: React.FC = () => {
 
             {/* Password Input */}
             <div className="relative">
-              <div className="flex items-center bg-white rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 transition-colors">
+              <div className="flex items-center bg-yellow-300 rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 transition-colors">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="password"
@@ -115,7 +115,7 @@ const LoginScreen: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-yellow-700 to-orange-500 hover:from-yellow-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-green-900 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="text-lg">
                 {isLoading ? 'LOGGING IN...' : 'LOG IN'}
@@ -128,7 +128,7 @@ const LoginScreen: React.FC = () => {
           <div className="text-center">
             <button 
               onClick={() => navigate('/register')}
-              className="text-gray-800 hover:text-gray-800 transition-colors"
+              className="text-black hover:text-gray-800 transition-colors"
             >
               <span className="font-medium">Don't have an account?</span>
               <span className="text-black hover:underline"> Register</span>

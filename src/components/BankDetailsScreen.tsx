@@ -103,7 +103,7 @@ const BankDetailsScreen: React.FC = () => {
           {/* Account Number */}
           <div className="bg-yellow-500 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center space-x-3 mb-4">
-              <Hash className="w-6 h-6 text-blue-600" />
+              <Hash className="w-6 h-6 text-black" />
               <h3 className="text-lg font-bold text-gray-800">Account Number</h3>
             </div>
             <input
@@ -111,7 +111,7 @@ const BankDetailsScreen: React.FC = () => {
               value={formData.accountNumber}
               onChange={(e) => handleInputChange('accountNumber', e.target.value)}
               placeholder="Enter account number"
-              className="w-full border-2 border-gray-200 rounded-2xl px-4 py-3 text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none mb-3"
+              className="w-full border-2 border-gray-200 rounded-2xl px-4 py-3 text-black placeholder-gray-400 focus:border-blue-500 focus:outline-none mb-3"
               required
             />
             <input
@@ -174,7 +174,7 @@ const BankDetailsScreen: React.FC = () => {
         </form>
 
         {/* Security Note */}
-        <div className="bg-yellow-500/10 backdrop-blur-sm rounded-3xl p-6 text-white">
+        {/* <div className="bg-yellow-500/10 backdrop-blur-sm rounded-3xl p-6 text-white">
           <div className="border-l-4 border-yellow-400 pl-4">
             <h3 className="font-bold mb-3">Security Information</h3>
             <div className="space-y-2 text-sm text-white/90">
@@ -184,7 +184,7 @@ const BankDetailsScreen: React.FC = () => {
               <p>• Only you can access this information</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
