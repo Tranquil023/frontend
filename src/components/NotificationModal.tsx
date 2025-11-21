@@ -31,7 +31,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose }
         <div className="space-y-3 text-sm text-gray-700 mb-6">
           <p>
             <span className="font-semibold">1.Platform launch time:</span>{' '}
-            <span className="text-green-600 font-semibold">October 23 - 2025</span>
+            <span className="text-green-600 font-semibold">November 21 - 2025</span>
           </p>
           
           <p>
